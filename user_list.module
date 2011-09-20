@@ -13,6 +13,7 @@ require_once 'includes/user_list.export.inc';
 require_once 'includes/user_list.settings.inc';
 require_once 'includes/user_list.utils.inc';
 
+$search_results;
 
 /**
  * TODO: feature: change the current search, get the results directly from the DB (in process, Vahan)
@@ -81,9 +82,8 @@ function _user_list($number = NULL, $paginated = TRUE, $include_more_link = NULL
   if ($include_more_link) {
     $include_more_link = ($count > $number ? $include_more_link : NULL);
   }
-  $output = theme('user_list_list', array(($default_header === NULL ? $header : $default_header), 
-                                          $users, ($default_empty_msg === NULL ? $empty_msg : $default_empty_msg), 
-                                          $paginated, $number, $element_override, $include_more_link));
+  $results = variable_get("search_results", array());
+  $output = theme('user_list_list', $results, $paginated);
   return $output;
 }
 
@@ -101,8 +101,9 @@ function user_list_theme() {
  * Implementation of hook_science_veiw()
  */
 function user_list_science_view() {
-  $search_result = variable_get("search_result", array());
-  $tab = new Tab("user_list", "User List", theme_user_list_list($search_result), 0);
+  global $search_results;
+  $search_results = variable_get("search_results", array());
+  $tab = new Tab("User List", "user_list", theme_user_list_list($search_results), 0);
   return $tab;
 }
 

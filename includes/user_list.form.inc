@@ -39,7 +39,7 @@ function user_list_form($form, &$form_state, $users) {
   foreach ($all_fields as $field) {
     $options_fields[$field['field_id']] = $field['label'];
   }  
-  $all_user_data = user_list_get_all_user_data();
+  $all_user_data = visualscience_get_user_data();
   $options_user_data = array();
   foreach ($all_user_data as $user_data) {
     $options_user_data[$user_data] = $user_data;
@@ -102,7 +102,7 @@ function user_list_form($form, &$form_state, $users) {
     '#prefix' => '<td>',
     '#suffix' => '</td></tr></table>',
   );
-    
+  
   $found_users = $users;
   if (isset($form_state['values']['user_data'])) {
     user_list_save_hidden_user_data($form_state['values']['user_data']);
@@ -119,7 +119,7 @@ function user_list_form($form, &$form_state, $users) {
     $text = trim($form_state['values']['text']);
     $form['users']['list'] = user_list_get_user_list($found_users);
   }
-
+  
   return $form; 
 }
 
