@@ -75,9 +75,9 @@ function _user_list_init(&$number, &$paginated, &$element_override) {
  * @param int $element_override		if this is NULL, then we will automatically assign and increment an pager element beginning with 0.
  *    								otherwise, we will use the value given.
  */
-function _user_list ($number = NULL, $paginated = TRUE, $include_more_link = NULL, $default_header = NULL, $default_empty_msg = NULL, $element_override = NULL) {
+function _user_list($number = NULL, $paginated = TRUE, $include_more_link = NULL, $default_header = NULL, $default_empty_msg = NULL, $element_override = NULL) {
   static $element = 0;
-  _user_list_init ($number, $paginated, $element_override);
+  _user_list_init($number, $paginated, $element_override);
   if ($include_more_link) {
     $include_more_link = ($count > $number ? $include_more_link : NULL);
   }
@@ -101,8 +101,8 @@ function user_list_theme() {
  * Implementation of hook_science_veiw()
  */
 function user_list_science_view() {
-  p("barev");
-  $tab = new Tab("user_list", "User List", theme_user_list_list(), 0);
+  $search_result = variable_get("search_result", array());
+  $tab = new Tab("user_list", "User List", theme_user_list_list($search_result), 0);
   return $tab;
 }
 
@@ -111,7 +111,7 @@ function user_list_science_view() {
  * TODO:
  * @param array $vars	contains arguments as an array
  */
-function theme_user_list_list ($list = array(), $paginated = FALSE) {
+function theme_user_list_list($list = array(), $paginated = FALSE) {
   drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
   drupal_add_library('system', 'ui.autocomplete');
   drupal_add_library('system', 'ui.datepicker');

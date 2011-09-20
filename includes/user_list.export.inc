@@ -6,7 +6,7 @@ $users = array();
  * 
  * Submit handler for user_list_form export button.
  */
-function user_list_export_submit ($form, &$form_state) {
+function user_list_export_submit($form, &$form_state) {
 
   $selected_users = array();
   foreach ($form_state['values']['list'] as $uid => $checked) {
@@ -24,7 +24,7 @@ function user_list_export_submit ($form, &$form_state) {
  * Creates CSV file with the users data and sends to the users to download
  * @param array $userlist	list of users to export
  */
-function user_list_export ($userlist = FALSE) {
+function user_list_export($userlist = FALSE) {
   $filename = 'userlist_'.date("Ymd").'.csv';
   //Load all usernames if data is empty
   if (!is_array($userlist) || empty($userlist)) {
