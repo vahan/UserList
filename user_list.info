@@ -1,0 +1,8 @@
+name = User List
+description = Provides various user list views as pages and blocks.
+version = VERSION
+core = 7.x
+
+version = "7.x-1.x-dev"
+project = "drupal"
+

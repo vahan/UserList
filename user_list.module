@@ -1,0 +1,145 @@
+<?php
+// $Id: user_list.module,v 1.19.2.2 2008/12/31 16:25:08 cyu Exp $
+
+/**
+ * @file
+ * This module creates several user lists, which may be viewed as pages and blocks.
+ * User lists may be displayed alphabetically, beginning with A-Z, by newest, by role, or as a list of users who have posted content of a certain type.
+ */
+
+require_once 'includes/user_list.fields.inc';
+require_once 'includes/user_list.form.inc';
+require_once 'includes/user_list.export.inc';
+require_once 'includes/user_list.settings.inc';
+require_once 'includes/user_list.utils.inc';
+
+
+/**
+ * TODO: feature: change the current search, get the results directly from the DB (in process, Vahan)
+ * TODO: bug: inner not does not work!
+ * TODO: bug: very quickly check/uncheck fields to show. Then user lsit columns are brocken
+ * TODO: bug: set currect email text and subject
+ * TODO: feature: add the list of users to whom the message is being sent to the message sending page;
+ * TODO: feature: make the search box the default active field
+ * FIXED: bug: fix positions when ajax is in process
+ * TODO: bug: after clicking on letters autocomplete does not work
+ * DONE: bug: empty search returns nothing, should return a complete list
+ * DONE: feature: after loading a search search is not done, still there is a need to refine the search
+ * FIXED: bug: if nothing is found a full list is returned, but should return nothing
+ * TODO: bug: sometimes the search load/save puts a wrong url - additional "q=userlist", FIXED at 22.06.2011, see line 259.
+ * TODO: feature: save shown fields with the saved search
+ * TODO: change all inner links to use l() functionuser
+ * TODO: the help text on top doesn't make too much sence. Especially the part with blocks and permissions.
+ * 
+ * FIXED: bug 1: after ajax search, the bottom links to access paginated search are not updated. If you try to click on them you get an error msg.
+ * FIXED: bug 2: authenticated role does not show up?  See get_user_role in includes\user_list.utils.inc
+ * FIXED: bug 3: no-more 'select all' checkbox after an ajax request?
+ * 
+ * DONE: feature 1: We need to create an easier and more powerful way to handle to ajax search. We need to be able to use boolean logic: OR, AND, NOT  
+ * DONE: feature 2: add button search/reset next to the ajax search
+ * TODO: feature 3: we leave on a side the 'selected_users' table. Instead we display all the users within a box which has a vertical scroll bar
+ * DONE: feature 4: The ajax search will hide what we don't want to see on a particular moment              
+ * DONE: feature 5: save the query strings on the server, so that we immediately found our old search results with updated users.
+ * TODO: feature 6: we will need to test it with huge amount of users to see how well it performs...
+ * DONE: feature 7: userlist/export/ create automatic exports for roles
+ * FIXED: BUG when loading search on urls with ?q
+ */
+
+/**
+ * Set defaults parameters.
+ * 
+ */
+function _user_list_init(&$number, &$paginated, &$element_override) {
+  
+  $paginated = TRUE;
+  if (!isset($element_override)) {
+    static $element;
+    $element_override = $element;
+    $element += 1;
+  }
+  
+  if (!$number) {
+    $number = variable_get('user_list_default_number', 1000);
+  }
+}
+
+
+/**
+ *  Returns a themed list of users
+ *  
+ * @param int $number				the number of users to return
+ * @param bool $paginated			will this have a paginator at the end?
+ * @param bool $include_more_link	TODO:
+ * @param string $default_header	If this has a value, then the default header for this $op will be overridden.
+ * @param string $default_empty_msg	If this has a value, then the default empty_msg for this $op will be overridden.
+ * @param int $element_override		if this is NULL, then we will automatically assign and increment an pager element beginning with 0.
+ *    								otherwise, we will use the value given.
+ */
+function _user_list ($number = NULL, $paginated = TRUE, $include_more_link = NULL, $default_header = NULL, $default_empty_msg = NULL, $element_override = NULL) {
+  static $element = 0;
+  _user_list_init ($number, $paginated, $element_override);
+  if ($include_more_link) {
+    $include_more_link = ($count > $number ? $include_more_link : NULL);
+  }
+  $output = theme('user_list_list', array(($default_header === NULL ? $header : $default_header), 
+                                          $users, ($default_empty_msg === NULL ? $empty_msg : $default_empty_msg), 
+                                          $paginated, $number, $element_override, $include_more_link));
+  return $output;
+}
+
+
+function user_list_theme() {
+  return array(
+    'user_list_list' => array(
+      'arguments' => array('content', NULL),
+    ),
+  );
+}
+
+/**
+ * 
+ * Implementation of hook_science_veiw()
+ */
+function user_list_science_view() {
+  p("barev");
+  $tab = new Tab("user_list", "User List", theme_user_list_list(), 0);
+  return $tab;
+}
+
+/**
+ * 
+ * TODO:
+ * @param array $vars	contains arguments as an array
+ */
+function theme_user_list_list ($list = array(), $paginated = FALSE) {
+  drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
+  drupal_add_library('system', 'ui.autocomplete');
+  drupal_add_library('system', 'ui.datepicker');
+  
+  $header = "User List";
+  $empty_msg = "There are currently no users in this category to list.";
+  $number = 30;
+  $element = 0;
+    
+  drupal_add_css(drupal_get_path('module', 'user_list') .'/user_list.css');
+  $output = '';
+  $output .= "<div id=\"visual_science_user_list\" class=\"user_list\">\n";
+  if ($header) {
+    $output .= '  <h3>'. $header ."</h3>\n  ";
+  }
+  $output .= "  <div class=\"content\">\n    ";
+  
+  if (empty($list)) {
+    $output .= $empty_msg."</div>";
+  }
+  else {
+    $output .= drupal_render(drupal_get_form('user_list_form', $list));
+    if ($paginated) {
+      $output .= theme('pager', array(NULL, $number, $element));
+    }
+    $output .= "</div>\n";
+  }
+  $output .= "  </div>\n  ";
+  
+  return $output;
+}

@@ -1,0 +1,74 @@
+<?php
+
+include_once 'includes/user_list.utils.inc';
+include_once 'includes/user_list.fields.inc';
+
+/**
+* 
+* Implementation of hook_schema().
+* @return array  the created schema
+*/
+function user_list_schema() {
+  //table for user data to hide
+  $schema[user_list_get_user_data_table_name()] = array(
+    'description' => 'Stores list of user data to be hidden.',
+    'fields' => array(
+      'data' => array(
+        'type' => 'varchar',
+        'length' => 1024,
+        'default' => '',
+        'description' => 'user data name.',
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'User ID who has saved the field data.',
+      ),
+    ),
+  );
+  
+  //table for fields to hide
+  $schema[user_list_get_field_table_name()] = array(
+    'description' => 'Stores list of fields to be hidden.',
+    'fields' => array(
+      'fid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Field ID of the field.',
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'User ID who has saved the field data.',
+      ),
+    ),
+  );
+  
+  return $schema;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function user_list_uninstall() {
+  drupal_uninstall_schema('user_list');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
