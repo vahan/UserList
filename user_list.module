@@ -13,7 +13,6 @@ require_once 'includes/user_list.export.inc';
 require_once 'includes/user_list.settings.inc';
 require_once 'includes/user_list.utils.inc';
 
-$search_results;
 
 /**
  * TODO: feature: change the current search, get the results directly from the DB (in process, Vahan)
@@ -87,7 +86,10 @@ function _user_list($number = NULL, $paginated = TRUE, $include_more_link = NULL
   return $output;
 }
 
-
+/**
+ * 
+ * TODO:
+ */
 function user_list_theme() {
   return array(
     'user_list_list' => array(
@@ -100,9 +102,7 @@ function user_list_theme() {
  * 
  * Implementation of hook_science_veiw()
  */
-function user_list_science_view() {
-  global $search_results;
-  $search_results = variable_get("search_results", array());
+function user_list_science_view($search_results) {
   $tab = new Tab("User List", "user_list", theme_user_list_list($search_results), 0);
   return $tab;
 }
@@ -112,7 +112,7 @@ function user_list_science_view() {
  * TODO:
  * @param array $vars	contains arguments as an array
  */
-function theme_user_list_list($list = array(), $paginated = FALSE) {
+function theme_user_list_list($list, $paginated = TRUE) {
   drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
   drupal_add_library('system', 'ui.autocomplete');
   drupal_add_library('system', 'ui.datepicker');
