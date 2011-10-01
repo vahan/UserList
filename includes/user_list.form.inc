@@ -113,13 +113,6 @@ function user_list_form($form, &$form_state, $users) {
     $form['users']['list'] = user_list_get_user_list($found_users);
   }
   
-  // An AJAX request calls the form builder function for every change.
-  // We can change how we build the form based on $form_state.
-  if (!empty($form_state['values']['text'])) {
-    $text = trim($form_state['values']['text']);
-    $form['users']['list'] = user_list_get_user_list($found_users);
-  }
-  
   return $form; 
 }
 

@@ -45,46 +45,7 @@ require_once 'includes/user_list.utils.inc';
  * FIXED: BUG when loading search on urls with ?q
  */
 
-/**
- * Set defaults parameters.
- * 
- */
-function _user_list_init(&$number, &$paginated, &$element_override) {
-  
-  $paginated = TRUE;
-  if (!isset($element_override)) {
-    static $element;
-    $element_override = $element;
-    $element += 1;
-  }
-  
-  if (!$number) {
-    $number = variable_get('user_list_default_number', 1000);
-  }
-}
 
-
-/**
- *  Returns a themed list of users
- *  
- * @param int $number				the number of users to return
- * @param bool $paginated			will this have a paginator at the end?
- * @param bool $include_more_link	TODO:
- * @param string $default_header	If this has a value, then the default header for this $op will be overridden.
- * @param string $default_empty_msg	If this has a value, then the default empty_msg for this $op will be overridden.
- * @param int $element_override		if this is NULL, then we will automatically assign and increment an pager element beginning with 0.
- *    								otherwise, we will use the value given.
- */
-function _user_list($number = NULL, $paginated = TRUE, $include_more_link = NULL, $default_header = NULL, $default_empty_msg = NULL, $element_override = NULL) {
-  static $element = 0;
-  _user_list_init($number, $paginated, $element_override);
-  if ($include_more_link) {
-    $include_more_link = ($count > $number ? $include_more_link : NULL);
-  }
-  $results = variable_get("search_results", array());
-  $output = theme('user_list_list', $results, $paginated);
-  return $output;
-}
 
 /**
  * 
@@ -93,30 +54,29 @@ function _user_list($number = NULL, $paginated = TRUE, $include_more_link = NULL
 function user_list_theme() {
   return array(
     'user_list_list' => array(
-      'arguments' => array('content', NULL),
+      'arguments' => array(array()),
     ),
   );
 }
 
 /**
  * 
- * Implementation of hook_science_veiw()
+ * Implementation of hook_title()
+ * 
+ * Returns the title of the current module's tab
  */
-function user_list_science_view($search_results) {
-  $tab = new Tab("User List", "user_list", theme_user_list_list($search_results), 0);
-  return $tab;
+function user_list_science_title() {
+  return "User List";
 }
 
 /**
  * 
- * TODO:
- * @param array $vars	contains arguments as an array
+ * Implementation of hook_science_veiw()
+ * 
+ * Returns HTML to show in the User List tab
+ * @param array $list	the search results to be rendered and shown in the tab
  */
-function theme_user_list_list($list, $paginated = TRUE) {
-  drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
-  drupal_add_library('system', 'ui.autocomplete');
-  drupal_add_library('system', 'ui.datepicker');
-  
+function user_list_science_tab($list, $paginated=FALSE) {
   $header = "User List";
   $empty_msg = "There are currently no users in this category to list.";
   $number = 30;
@@ -124,7 +84,7 @@ function theme_user_list_list($list, $paginated = TRUE) {
     
   drupal_add_css(drupal_get_path('module', 'user_list') .'/user_list.css');
   $output = '';
-  $output .= "<div id=\"visual_science_user_list\" class=\"user_list\">\n";
+  //$output .= "<div id=\"visualscience_user_list\" class=\"user_list\">\n"; //now is done in visualscience
   if ($header) {
     $output .= '  <h3>'. $header ."</h3>\n  ";
   }
@@ -142,5 +102,18 @@ function theme_user_list_list($list, $paginated = TRUE) {
   }
   $output .= "  </div>\n  ";
   
-  return $output;
+  return $output;;
+}
+
+/**
+ * 
+ * TODO:
+ * @param array $vars	contains arguments as an array
+ */
+function theme_user_list_list($list, $paginated = FALSE) {
+  drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
+  drupal_add_library('system', 'ui.autocomplete');
+  drupal_add_library('system', 'ui.datepicker');
+  
+  return user_list_science_tab($list, $paginated);
 }
