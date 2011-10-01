@@ -31,6 +31,8 @@ function user_list_form($form, &$form_state, $users) {
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#title' => t('Found Users'),
+    '#prefix' => '<div id="visualscience_user_list">',
+    '#suffix' => '</div>',
   );
   $form['users']['list'] = user_list_get_user_list($users);
   
@@ -208,8 +210,6 @@ function user_list_get_user_list($users) {
   	'#multiple' => TRUE,
   	'#js_select' => TRUE,
     '#input'=>true,
-    '#prefix' => '<div id="users_div">',
-    '#suffix' => '</div>',
   );
 }
 
