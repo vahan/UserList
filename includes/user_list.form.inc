@@ -82,7 +82,7 @@ function user_list_form($form, &$form_state, $users) {
   	'#suffix' => '</td></tr></table></div>',
   );
   
-  $form['submit'] = array(
+  $form['users']['submit'] = array(
   	'#type' => 'submit',
   	'#value' => t('Enter the message >>'),
   	'#submit' => array('user_list_form_submit'),
@@ -90,7 +90,7 @@ function user_list_form($form, &$form_state, $users) {
     '#prefix' => '<table id="actions-table"><tr><td>',
   );
   
-  $form['export'] = array(
+  $form['users']['export'] = array(
   	'#type' => 'submit',
   	'#value' => t('Export to CSV'),
   	'#submit' => array('user_list_export_submit'),
@@ -98,7 +98,7 @@ function user_list_form($form, &$form_state, $users) {
   	'#suffix' => '</td>',
   );
   
-  $form['settings'] = array(
+  $form['users']['settings'] = array(
     '#type' => 'item',
     '#title' => l(t("Settings"),"admin/settings/userlist"),
     '#prefix' => '<td>',
