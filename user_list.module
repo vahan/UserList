@@ -76,7 +76,7 @@ function user_list_science_title() {
  * Returns HTML to show in the User List tab
  * @param array $list	the search results to be rendered and shown in the tab
  */
-function user_list_science_tab($list) {
+function user_list_science_tab($list, $update=FALSE) {
   $paginated = FALSE;
   $header = "User List";
   $empty_msg = "There are currently no users in this category to list.";
@@ -86,7 +86,7 @@ function user_list_science_tab($list) {
   drupal_add_css(drupal_get_path('module', 'user_list') .'/user_list.css');
   $output = '';
   //$output .= "<div id=\"visualscience_user_list\" class=\"user_list\">\n"; //now is done in visualscience
-  if ($header) {
+  if (!$update && $header) {
     $output .= '  <h3>'. $header ."</h3>\n  ";
   }
   $output .= "  <div class=\"content\">\n    ";

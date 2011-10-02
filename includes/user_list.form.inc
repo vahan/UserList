@@ -60,7 +60,7 @@ function user_list_form($form, &$form_state, $users) {
     '#options' => $options_user_data,
       '#default_value' => array_keys(user_list_get_shown_user_data()),
     '#ajax' => array(
-      'callback' => 'user_list_search_callback',
+      'callback' => 'user_list_fields_callback',
       'wrapper' => 'users_div',
       'progress' => array(),
     ),
@@ -74,7 +74,7 @@ function user_list_form($form, &$form_state, $users) {
     '#options' => $options_fields,
       '#default_value' => array_keys(user_list_get_shown_fields()),
     '#ajax' => array(
-      'callback' => 'user_list_search_callback',
+      'callback' => 'user_list_fields_callback',
       'wrapper' => 'users_div',
       'progress' => array(),
     ),
@@ -105,14 +105,13 @@ function user_list_form($form, &$form_state, $users) {
     '#suffix' => '</td></tr></table>',
   );
   
-  $found_users = $users;
   if (isset($form_state['values']['user_data'])) {
     user_list_save_hidden_user_data($form_state['values']['user_data']);
-    $form['users']['list'] = user_list_get_user_list($found_users);
+    $form['users']['list'] = user_list_get_user_list($users);
   }
   if (isset($form_state['values']['field_list'])) {
     user_list_save_hidden_fields($form_state['values']['field_list']);
-    $form['users']['list'] = user_list_get_user_list($found_users);
+    $form['users']['list'] = user_list_get_user_list($users);
   }
   
   return $form; 
@@ -120,10 +119,22 @@ function user_list_form($form, &$form_state, $users) {
 
 /**
  * 
+ * Ajax callback for the fields.
+ * @param array $form    the form for wich this function is used.
+ * @param array $form_state refernce on the array representing the state of the form
+ * @return          renderable array
+ */
+function user_list_fields_callback($form, $form_state) {
+  $_GET["q"] = "userlist";
+  return $form['users']['list'];
+}
+
+/**
+ * 
  * Ajax callback for search saving 
  * @param array $form		the form for wich this function is used.
  * @param array $form_state	refernce on the array representing the state of the form
- * @return					modified form 
+ * @return					modified form
  */
 function user_list_search_save_callback($form, $form_state) {
   global $user;
@@ -139,18 +150,6 @@ function user_list_search_save_callback($form, $form_state) {
   }
   
   return $form['users']['save'];
-}
-
-/**
- * 
- * Ajax callback for the search.
- * @param array $form    the form for wich this function is used.
- * @param array $form_state refernce on the array representing the state of the form
- * @return          renderable array
- */
-function user_list_search_callback($form, $form_state) {
-  $_GET["q"] = "userlist";
-  return $form['users']['list'];
 }
 
 /**
