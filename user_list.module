@@ -46,19 +46,6 @@ require_once 'includes/user_list.utils.inc';
  */
 
 
-
-/**
- * 
- * TODO:
- */
-function user_list_theme() {
-  return array(
-    'user_list_list' => array(
-      'arguments' => array(array()),
-    ),
-  );
-}
-
 /**
  * 
  * Implementation of hook_title()
@@ -77,12 +64,15 @@ function user_list_science_title() {
  * @param array $list	the search results to be rendered and shown in the tab
  */
 function user_list_science_tab($list) {
+  drupal_add_js('http://livingscience.ethz.ch/livingscience/livingscience/livingscience.nocache.js', 'external'); //TODO: js adds somehow wrongly!
+  drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
+  
   $paginated = FALSE;
   $header = "User List";
   $empty_msg = "There are currently no users in this category to list.";
   $number = 30;
   $element = 0;
-    
+  
   drupal_add_css(drupal_get_path('module', 'user_list') .'/user_list.css');
   $output = '<div id="visualscience-user_list">';
   if ($header) {
@@ -111,9 +101,6 @@ function user_list_science_tab($list) {
  * @param array $vars	contains arguments as an array
  */
 function theme_user_list_list($list, $paginated = FALSE) {
-  drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
-  drupal_add_library('system', 'ui.autocomplete');
-  drupal_add_library('system', 'ui.datepicker');
   
   return user_list_science_tab($list, $paginated);
 }

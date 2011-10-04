@@ -95,7 +95,7 @@ function user_list_form($form, &$form_state, $users) {
   	'#value' => t('Export to CSV'),
   	'#submit' => array('user_list_export_submit'),
   	'#validate' => array('user_list_form_validate'),
-  	'#suffix' => '</td>',
+    '#suffix' => '<input type="button" class="form-submit" value="LS Map" onclick="lsSearch();"/></td>',
   );
   
   $form['users']['settings'] = array(
@@ -103,6 +103,21 @@ function user_list_form($form, &$form_state, $users) {
     '#title' => l(t("Settings"),"admin/settings/userlist"),
     '#prefix' => '<td>',
     '#suffix' => '</td></tr></table>',
+  );
+  
+  $form['users']['ls_progress'] = array(
+    '#type' => 'container',
+    '#attributes' => array('id'=>'watchProgress'),
+  );
+  
+  $form['users']['ls_map'] = array(
+    '#type' => 'container',
+    '#attributes' => array('id'=>'mapcontainer', 'style'=>'width:700px; height:300px'),
+  );
+  
+  $form['users']['ls_results'] = array(
+    '#type' => 'container',
+    '#attributes' => array('id' => 'searchResults'),
   );
   
   if (isset($form_state['values']['user_data'])) {
@@ -279,7 +294,7 @@ function user_list_form_submit($form, &$form_state) {
   $form_state['page_num'] = 2;
   $form_state['rebuild'] = TRUE;
   
-  $form_state['redirect'] = 'userlist/export';
+  $form_state['redirect'] = 'userlist/export'; //TODO: why is this here??
 }
 
 
@@ -297,7 +312,7 @@ function user_list_form_validate($form, &$form_state)
         return;
     }
   }
-    form_set_error('values', 'Select at least one user');
+  form_set_error('values', 'Select at least one user');
 }
 
 /**
