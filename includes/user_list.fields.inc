@@ -81,8 +81,8 @@ function user_list_get_hidden_user_data() {
  * 
  * Returns a list of the current user's data which are shown
  */
-function user_list_get_shown_user_data() {
-  $data_all = visualscience_get_user_data();
+function user_list_get_shown_data($table) {
+  $data_all = $table=="users"?visualscience_get_user_data():visualscience_get_node_data();
   $data_hidden = user_list_get_hidden_user_data();
   $data_shown = array();
   foreach ($data_all as $data) {

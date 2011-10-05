@@ -58,7 +58,7 @@ function user_list_form($form, &$form_state, $users) {
     '#type' => 'checkboxes',
     '#title' => t(''),
     '#options' => $options_user_data,
-  	'#default_value' => array_keys(user_list_get_shown_user_data()),
+  	'#default_value' => array_keys(user_list_get_shown_data(variable_get('visualscience_search_table', 'users'))),
     '#ajax' => array(
       'callback' => 'user_list_fields_callback',
       'wrapper' => 'user_list-list',
@@ -174,40 +174,49 @@ function user_list_search_save_callback($form, $form_state) {
  * @return      form renderable array of users in #tableselect element
  * @author Vahan
  */
-function user_list_get_user_list($users) {
-    
+function user_list_get_user_list($list) {
+  $table = variable_get("visualscience_search_table", "users");
   $statuses = array('blocked', 'active');
   $options = array();
   $field_columns = array();
       
-  $user_data = user_list_get_shown_user_data();
+  $data = user_list_get_shown_data($table);
   $header = array();
-  foreach ($user_data as $data) {
-    $header[$data] = array("data" => $data, 'field' => 'u.'.$data);
-    $user_data_columns[$data] = $data;
+  foreach ($data as $d) {
+    $header[$d] = array("data" => $d, 'field' => 'u.'.$d); //TODO: rename 'u.' to include also nodes
+    $user_data_columns[$d] = $d;
   }
   
-  $fields = user_list_get_shown_fields();
-    
-  foreach ($fields as $field) {
-    $header[$field['label']] = array("data" => $field['label'], 'field' => 'u.data');
-    $field_columns[$field['field_id']] = $field['label'];
-  }
-  
-  foreach ($users as $user) {
-    $u = user_load($user->uid);
-    
-    $options[$user->uid] = array( //TODO: use user_list_get_all_user_data() instead hard coding!
-        'name' => $user->name,
-        'mail' =>  $user->mail,
-        'role' => implode("; ", user_load($user->uid)->roles),
-  		'created' => format_date($user->created, 'custom', 'd-m-Y'),
-  		'status' =>  $statuses[$user->status],
-    );
-      
-    foreach ($field_columns as $fid => $fname) {
-      $options[$user->uid][$fname] = implode(",", user_list_user_fields($user->uid, $fid));
+  if ($table == "users") {
+    $fields = user_list_get_shown_fields();
+    foreach ($fields as $field) {
+      $header[$field['label']] = array("data" => $field['label'], 'field' => 'u.data');
+      $field_columns[$field['field_id']] = $field['label'];
     }
+  }
+  
+  foreach ($list as $item) {
+    $u = user_load($item->uid);
+    
+    if ($table == "users") {
+      $options[$item->uid] = array( //TODO: use user_list_get_all_user_data() instead hard coding!
+          'name' => $item->name,
+          'mail' =>  $item->mail,
+          'role' => implode("; ", user_load($item->uid)->roles),
+          'created' => format_date($item->created, 'custom', 'd-m-Y'),
+          'status' =>  $statuses[$item->status],
+      );
+      foreach ($field_columns as $fid => $fname) {
+        $options[$item->uid][$fname] = implode(",", user_list_user_fields($item->uid, $fid));
+      }
+    } elseif ($table == "node") {
+      $node_data = visualscience_get_node_data();
+      foreach ($node_data as $d) {
+        $options[$item->nid][$d] = $item->$d;
+      }
+    } else {
+      $options = array();
+    }    
   }
 
   return array(
