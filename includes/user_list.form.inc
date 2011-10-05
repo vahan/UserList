@@ -58,10 +58,10 @@ function user_list_form($form, &$form_state, $users) {
     '#type' => 'checkboxes',
     '#title' => t(''),
     '#options' => $options_user_data,
-      '#default_value' => array_keys(user_list_get_shown_user_data()),
+  	'#default_value' => array_keys(user_list_get_shown_user_data()),
     '#ajax' => array(
       'callback' => 'user_list_fields_callback',
-      'wrapper' => 'users_div',
+      'wrapper' => 'user_list-list',
       'progress' => array(),
     ),
   	'#prefix' => '<div style="max-height: 300px; overflow: auto"><table style="border: 0;"><tr><td valign="top" style="border: 0;">',
@@ -75,7 +75,7 @@ function user_list_form($form, &$form_state, $users) {
       '#default_value' => array_keys(user_list_get_shown_fields()),
     '#ajax' => array(
       'callback' => 'user_list_fields_callback',
-      'wrapper' => 'users_div',
+      'wrapper' => 'user_list-list',
       'progress' => array(),
     ),
   	'#prefix' => '<td valign="top" style="border: 0;">',
@@ -224,6 +224,7 @@ function user_list_get_user_list($users) {
   	'#multiple' => TRUE,
   	'#js_select' => TRUE,
     '#input'=>true,
+    '#attributes' => array("id"=>"user_list-list"),
   );
 }
 

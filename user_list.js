@@ -9,7 +9,7 @@ function lsSearch() {
 	document.getElementById("watchProgress").innerHTML = "Please wait...";
 	
 	//Create a search query from the selected users
-	var query = ""; //TODO: create the correct query
+	var query = "";
 	userListCheckboxes = jQuery(':checkbox[id|="edit-list"]:checked').each(function(index){
 		query += jQuery(this).parent().parent().next().text();
 		query += " ";
@@ -17,6 +17,7 @@ function lsSearch() {
 	
 	console.log("query: " + query);
 	livingscience.search(query, function(publications) {
+		console.log("lavash");
 		document.getElementById("watchProgress").innerHTML = "Enjoy ;)";
 		var html = "";
 		if (publications)
