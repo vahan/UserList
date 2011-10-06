@@ -303,15 +303,12 @@ function user_list_form_submit($form, &$form_state) {
   // When form rebuilds, it will look at this to figure which page to build.
   $form_state['page_num'] = 2;
   $form_state['rebuild'] = TRUE;
-  
-  $form_state['redirect'] = 'userlist/export'; //TODO: why is this here??
 }
-
 
 /**
  * 
  * Validate handler for the message button on first page.
- * @param array $form    the form for wich this function is used.
+ * @param array $form		the form for wich this function is used.
  * @param array $form_state refernce on the array representing the state of the form
  */
 function user_list_form_validate($form, &$form_state)
@@ -329,7 +326,7 @@ function user_list_form_validate($form, &$form_state)
  * 
  * The page 2 submit handler.
  * This is the final submit handler. Send the entered message to the selected users
- * @param array $form    the form for wich this function is used.
+ * @param array $form		the form for wich this function is used.
  * @param array $form_state refernce on the array representing the state of the form
  */
 function user_list_form_message_submit($form, &$form_state) {
@@ -400,7 +397,7 @@ function user_list_form_message_validate($form, &$form_state) {
  * Redirects to userlist page
  */
 function user_list_redirect_to_userlist() {
-  drupal_goto('userlist');
+  drupal_goto('visualscience/user_list');
 }
 
 ?>

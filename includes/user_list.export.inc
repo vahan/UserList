@@ -39,7 +39,7 @@ function user_list_export($userlist = FALSE) {
       $userlist[] = array($account->name);
     }
   }
-  $user_data = user_list_get_shown_user_data();
+  $user_data = user_list_get_shown_data("users");
   $fields = user_list_get_shown_fields();
   $field_names = array();
   foreach ($fields as $field_id => $field) {
