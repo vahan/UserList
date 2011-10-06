@@ -10,14 +10,15 @@ function lsSearch() {
 	
 	//Create a search query from the selected users
 	var query = "";
-	userListCheckboxes = jQuery(':checkbox[id|="edit-list"]:checked').each(function(index){
+	//userListCheckboxes = jQuery(':checkbox[id|="edit-list"]:checked').each(function(index){
+		userListCheckboxes = jQuery(':checkbox:checked').each(function(index){
 		query += jQuery(this).parent().parent().next().text();
 		query += " ";
 	});
 	
 	console.log("query: " + query);
 	livingscience.search(query, function(publications) {
-		console.log("lavash");
+		//console.log("lavash");
 		document.getElementById("watchProgress").innerHTML = "Enjoy ;)";
 		var html = "";
 		if (publications)

@@ -65,6 +65,7 @@ function user_list_science_title() {
  */
 function user_list_science_tab($list) {
   drupal_add_js('http://livingscience.ethz.ch/livingscience/livingscience/livingscience.nocache.js', 'external'); //TODO: js adds somehow wrongly!
+  //drupal_add_js(drupal_get_path('module', 'user_list') .'/livingscience.nocache.js');
   drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
   
   $paginated = FALSE;
