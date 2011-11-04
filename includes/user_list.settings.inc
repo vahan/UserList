@@ -38,15 +38,18 @@ function user_list_help($path, $arg) {
 }
 
 /**
- * Implementes hook_perm()
+ * Implementes hook_permission()
  * 
  */
-function user_list_perm() {
-  return array('access user lists', 'administer user lists');
+function user_list_permission() {
+  return array(
+  	'access visualscience' => array('title' => t('Access user list page')), 
+  	'administer visualscience' => array('title' => t('Administer user list settings')),
+  );
 }
 
 
-function user_list_admin_settings() {
+function user_list_settings_form() {
   $form = array();
 
   $form['user_list_default_number'] = array(

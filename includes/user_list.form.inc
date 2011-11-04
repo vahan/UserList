@@ -98,13 +98,6 @@ function user_list_form($form, &$form_state, $users) {
     '#suffix' => '<input type="button" class="form-submit" value="LS Map" onclick="lsSearch();"/></td>',
   );
   
-  $form['users']['settings'] = array(
-    '#type' => 'item',
-    '#title' => l(t("Settings"),"admin/settings/userlist"),
-    '#prefix' => '<td>',
-    '#suffix' => '</td></tr></table>',
-  );
-  
   $form['users']['ls_progress'] = array(
     '#type' => 'container',
     '#attributes' => array('id'=>'watchProgress'),
