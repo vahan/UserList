@@ -20,12 +20,12 @@
  */
 function user_list_form($form, &$form_state, $users) {
   global $user;
-
+  
   if (isset($form_state['page_num']) && $form_state['page_num'] == 2) {
       return user_list_form_message($form, $form_state, $users);
   }
   // Otherwise we build page 1.
-  
+  $form_state['page_num'] = 1;
   $form['users'] = array(
     '#type' => 'fieldset',
     '#collapsible' => TRUE,
@@ -72,7 +72,7 @@ function user_list_form($form, &$form_state, $users) {
     '#type' => 'checkboxes',
     '#title' => t(''),
     '#options' => $options_fields,
-      '#default_value' => array_keys(user_list_get_shown_fields()),
+    '#default_value' => array_keys(user_list_get_shown_fields()),
     '#ajax' => array(
       'callback' => 'user_list_fields_callback',
       'wrapper' => 'user_list-list',
@@ -163,14 +163,13 @@ function user_list_search_save_callback($form, $form_state) {
 /**
  * 
  * Returns an array of users ready to be shown in the form
- * @param $users  array of user object
- * @return      form renderable array of users in #tableselect element
+ * @param $list	array of user object
+ * @return		form renderable array of users in #tableselect element
  * @author Vahan
  */
 function user_list_get_user_list($list) {
   $table = variable_get("visualscience_search_table", "users");
   $statuses = array('blocked', 'active');
-  $options = array();
   $field_columns = array();
       
   $data = user_list_get_shown_data($table);
@@ -188,46 +187,53 @@ function user_list_get_user_list($list) {
     }
   }
   
-  foreach ($list as $item) {
-    $u = user_load($item->uid);
-    
-    if ($table == "users") {
-      $options[$item->uid] = array( //TODO: use user_list_get_all_user_data() instead hard coding!
-          'name' => $item->name,
-          'mail' =>  $item->mail,
-          'role' => implode("; ", user_load($item->uid)->roles),
-          'created' => format_date($item->created, 'custom', 'd-m-Y'),
-          'status' =>  $statuses[$item->status],
-      );
-      foreach ($field_columns as $fid => $fname) {
-        $options[$item->uid][$fname] = implode(",", user_list_user_fields($item->uid, $fid));
-      }
-    } elseif ($table == "node") {
-      $node_data = visualscience_get_node_data();
-      foreach ($node_data as $d) {
-        $options[$item->nid][$d] = $item->$d;
-      }
-    } else {
-      $options = array();
-    }    
+  if (!empty($list)) {
+    $options = array();
+    foreach ($list as $item) {
+      $u = user_load($item->uid);
+      
+      if ($table == "users") {
+        $options[$item->uid] = array(
+            'name' => $item->name,
+            'mail' =>  $item->mail,
+            'role' => implode("; ", user_load($item->uid)->roles),
+            'status' =>  $statuses[$item->status],
+            'created' => format_date($item->created, 'custom', 'd-m-Y'),
+        );
+        foreach ($field_columns as $fid => $fname) {
+          $options[$item->uid][$fname] = implode(",", user_list_user_fields($item->uid, $fid));
+        }
+      } elseif ($table == "node") {
+        $node_data = visualscience_get_node_data();
+        foreach ($node_data as $d) {
+          $options[$item->nid][$d] = $item->$d;
+        }
+      } else {
+        $options = array();
+      }    
+    }
+    return array(
+      '#type' => 'tableselect',
+      '#header' => $header,
+      '#options' => $options,
+      '#ajax' => array(
+        'callback' => 'user_list_checked_callback',
+      	'wrapper' => 'users_selected_div',
+      	'event' => 'click',
+      ),
+      '#tree' => TRUE,
+      '#multiple' => TRUE,
+      '#js_select' => TRUE,
+      '#input'=>true,
+      '#attributes' => array("id"=>"user_list-list"),
+    );
+  } else {
+    return array(
+      '#type' => 'container',
+      '#prefix' => '<div id="user_list-list">'.t('There are no users found'),
+      '#suffix' => '</div>',
+    );
   }
-
-  return array(
-  	'#type' => 'tableselect',
-  	'#header' => $header,
-  	'#options' => $options,
-  	'#ajax' => array(
-  		'callback' => 'user_list_checked_callback',
-        'wrapper' => 'users_selected_div',
-        'event' => 'click',
-    ),
-  	'#empty' => t('No people available.'),
-    '#tree' => TRUE,
-  	'#multiple' => TRUE,
-  	'#js_select' => TRUE,
-    '#input'=>true,
-    '#attributes' => array("id"=>"user_list-list"),
-  );
 }
 
 /**
@@ -273,9 +279,9 @@ function user_list_form_message($form, &$form_state, $users)
   
   $form['submit_mail'] = array(
     '#type' => 'submit',
-      '#value' => t('Send >>'),
-      '#submit' => array('user_list_form_message_submit'),
-      '#validate' => array('user_list_form_message_validate')
+    '#value' => t('Send >>'),
+    '#submit' => array('user_list_form_message_submit'),
+    '#validate' => array('user_list_form_message_validate')
   );
   return $form;
 }
@@ -286,7 +292,7 @@ function user_list_form_message($form, &$form_state, $users)
  * @param array $form    the form for wich this function is used.
  * @param array $form_state refernce on the array representing the state of the form
  */
-function user_list_form_submit($form, &$form_state) {  
+function user_list_form_submit($form, &$form_state) {
   $form_state['page_values'][1] = $form_state['values'];
 
   if (!empty($form_state['page_values'][2])) {

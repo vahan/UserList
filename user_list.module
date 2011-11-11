@@ -65,7 +65,6 @@ function user_list_science_title() {
  */
 function user_list_science_tab($list) {
   drupal_add_js('http://livingscience.ethz.ch/livingscience/livingscience/livingscience.nocache.js', 'external'); //TODO: js adds somehow wrongly!
-  //drupal_add_js(drupal_get_path('module', 'user_list') .'/livingscience.nocache.js');
   drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
   
   $paginated = FALSE;
@@ -81,20 +80,33 @@ function user_list_science_tab($list) {
   }
   $output .= "  <div class=\"content\">\n    ";
   
-  if (empty($list)) {
-    $output .= $empty_msg."</div>";
+  $output .= drupal_render(drupal_get_form('user_list_form', $list));
+  if ($paginated) {
+    $output .= theme('pager', array(NULL, $number, $element));
   }
-  else {
-    $output .= drupal_render(drupal_get_form('user_list_form', $list));
-    if ($paginated) {
-      $output .= theme('pager', array(NULL, $number, $element));
-    }
-    $output .= "</div>\n";
-  }
+  $output .= "</div>\n";
   $output .= "  </div>\n   </div>\n";
   
   return $output;;
 }
+
+/**
+ * 
+ * Returns the div Id to be updated after search
+ */
+function user_list_get_update_div() {
+  return "user_list-list";
+}
+
+/**
+ * 
+ * Returns updated part of the list
+ * @param array $list	list of found users 	
+ */
+function user_list_update_tab($list) {
+  return user_list_get_user_list($list);
+}
+
 
 /**
  * 

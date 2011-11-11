@@ -1,0 +1,1935 @@
+Array
+(
+    [build_info] => Array
+        (
+            [args] => Array
+                (
+                    [0] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [uid] => 11
+                                    [name] => stefano
+                                    [pass] => $S$DtDcLOTxv43wtHXqIoVBRTMP5/z16xTTAf/S2lUwyw647oUzcXk8
+                                    [mail] => stefano@ethz.ch
+                                    [theme] => 
+                                    [signature] => 
+                                    [signature_format] => filtered_html
+                                    [created] => 1320108742
+                                    [access] => 0
+                                    [login] => 0
+                                    [status] => 1
+                                    [timezone] => Europe/Berlin
+                                    [language] => 
+                                    [picture] => 
+                                    [init] => stefano@ethz.ch
+                                    [data] => 
+                                    [roles] => Array
+                                        (
+                                            [2] => authenticated user
+                                            [4] => manager
+                                        )
+
+                                    [rdf_mapping] => Array
+                                        (
+                                            [rdftype] => Array
+                                                (
+                                                    [0] => sioc:UserAccount
+                                                )
+
+                                            [name] => Array
+                                                (
+                                                    [predicates] => Array
+                                                        (
+                                                            [0] => foaf:name
+                                                        )
+
+                                                )
+
+                                            [homepage] => Array
+                                                (
+                                                    [predicates] => Array
+                                                        (
+                                                            [0] => foaf:page
+                                                        )
+
+                                                    [type] => rel
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [files] => Array
+                (
+                )
+
+        )
+
+    [programmed] => 
+    [cache] => 1
+    [process_input] => 1
+    [rebuild] => 1
+    [rebuild_info] => Array
+        (
+        )
+
+    [redirect] => 
+    [temporary] => Array
+        (
+        )
+
+    [submitted] => 1
+    [executed] => 1
+    [method] => post
+    [groups] => Array
+        (
+            [users] => Array
+                (
+                    [#group_exists] => 1
+                )
+
+            [fields] => Array
+                (
+                    [#group_exists] => 1
+                )
+
+        )
+
+    [buttons] => Array
+        (
+            [0] => Array
+                (
+                    [#type] => submit
+                    [#value] => Enter the message >>
+                    [#submit] => Array
+                        (
+                            [0] => user_list_form_submit
+                        )
+
+                    [#validate] => Array
+                        (
+                            [0] => user_list_form_validate
+                        )
+
+                    [#prefix] => <table id="actions-table"><tr><td>
+                    [#input] => 1
+                    [#name] => op
+                    [#button_type] => submit
+                    [#executes_submit_callback] => 1
+                    [#limit_validation_errors] => 
+                    [#process] => Array
+                        (
+                            [0] => ajax_process_form
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => button
+                        )
+
+                    [#defaults_loaded] => 1
+                    [#tree] => 
+                    [#parents] => Array
+                        (
+                            [0] => submit
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => users
+                            [1] => submit
+                        )
+
+                    [#weight] => 0.002
+                    [#processed] => 
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#title_display] => before
+                    [#id] => edit-submit
+                )
+
+            [1] => Array
+                (
+                    [#type] => submit
+                    [#value] => Export to CSV
+                    [#submit] => Array
+                        (
+                            [0] => user_list_export_submit
+                        )
+
+                    [#validate] => Array
+                        (
+                            [0] => user_list_form_validate
+                        )
+
+                    [#suffix] => <input type="button" class="form-submit" value="LS Map" onclick="lsSearch();"/></td>
+                    [#input] => 1
+                    [#name] => op
+                    [#button_type] => submit
+                    [#executes_submit_callback] => 1
+                    [#limit_validation_errors] => 
+                    [#process] => Array
+                        (
+                            [0] => ajax_process_form
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => button
+                        )
+
+                    [#defaults_loaded] => 1
+                    [#tree] => 
+                    [#parents] => Array
+                        (
+                            [0] => export
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => users
+                            [1] => export
+                        )
+
+                    [#weight] => 0.003
+                    [#processed] => 
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#title_display] => before
+                    [#id] => edit-export
+                )
+
+        )
+
+    [input] => Array
+        (
+            [list] => Array
+                (
+                    [11] => 11
+                )
+
+            [user_data] => Array
+                (
+                    [name] => name
+                    [mail] => mail
+                    [role] => role
+                    [status] => status
+                    [created] => created
+                )
+
+            [op] => Enter the message >>
+            [form_build_id] => form-g_36FUfg9gb-SVTg1r5iFmP1bTX8ZmQ4OxFqkDWDaHc
+            [form_token] => fB16BhBAPOr3zBeYLZ1-s_lfi--fQhpEvimt9yHZZm4
+            [form_id] => user_list_form
+            [field_list] => 
+        )
+
+    [values] => Array
+        (
+            [list] => Array
+                (
+                    [11] => 11
+                )
+
+            [user_data] => Array
+                (
+                    [name] => name
+                    [mail] => mail
+                    [role] => role
+                    [status] => status
+                    [created] => created
+                )
+
+            [field_list] => Array
+                (
+                )
+
+            [submit] => Enter the message >>
+            [export] => Export to CSV
+            [form_build_id] => form-g_36FUfg9gb-SVTg1r5iFmP1bTX8ZmQ4OxFqkDWDaHc
+            [form_token] => fB16BhBAPOr3zBeYLZ1-s_lfi--fQhpEvimt9yHZZm4
+            [form_id] => user_list_form
+            [op] => Enter the message >>
+        )
+
+    [complete form] => Array
+        (
+            [users] => Array
+                (
+                    [#type] => fieldset
+                    [#collapsible] => 1
+                    [#collapsed] => 
+                    [#title] => Found Users
+                    [#prefix] => <div id="visualscience_user_list">
+                    [#suffix] => </div>
+                    [list] => Array
+                        (
+                            [#type] => tableselect
+                            [#header] => Array
+                                (
+                                    [name] => Array
+                                        (
+                                            [data] => name
+                                            [field] => u.name
+                                        )
+
+                                    [mail] => Array
+                                        (
+                                            [data] => mail
+                                            [field] => u.mail
+                                        )
+
+                                    [role] => Array
+                                        (
+                                            [data] => role
+                                            [field] => u.role
+                                        )
+
+                                    [status] => Array
+                                        (
+                                            [data] => status
+                                            [field] => u.status
+                                        )
+
+                                    [created] => Array
+                                        (
+                                            [data] => created
+                                            [field] => u.created
+                                        )
+
+                                )
+
+                            [#options] => Array
+                                (
+                                    [11] => Array
+                                        (
+                                            [name] => stefano
+                                            [mail] => stefano@ethz.ch
+                                            [role] => authenticated user; manager
+                                            [created] => 01-11-2011
+                                            [status] => active
+                                        )
+
+                                )
+
+                            [#ajax] => Array
+                                (
+                                    [callback] => user_list_checked_callback
+                                    [wrapper] => users_selected_div
+                                    [event] => click
+                                )
+
+                            [#empty] => No people available.
+                            [#tree] => 1
+                            [#multiple] => 1
+                            [#js_select] => 1
+                            [#input] => 1
+                            [#attributes] => Array
+                                (
+                                    [id] => user_list-list
+                                )
+
+                            [#process] => Array
+                                (
+                                    [0] => form_process_tableselect
+                                )
+
+                            [#theme] => tableselect
+                            [#defaults_loaded] => 1
+                            [#parents] => Array
+                                (
+                                    [0] => list
+                                )
+
+                            [#array_parents] => Array
+                                (
+                                    [0] => users
+                                    [1] => list
+                                )
+
+                            [#weight] => 0
+                            [#processed] => 1
+                            [#required] => 
+                            [#title_display] => before
+                            [#id] => edit-list
+                            [#name] => list
+                            [#value] => Array
+                                (
+                                    [11] => 11
+                                )
+
+                            [#needs_validation] => 1
+                            [#default_value] => Array
+                                (
+                                )
+
+                            [11] => Array
+                                (
+                                    [#type] => checkbox
+                                    [#title] => 
+                                    [#title_display] => invisible
+                                    [#return_value] => 11
+                                    [#default_value] => 11
+                                    [#attributes] => Array
+                                        (
+                                            [id] => user_list-list
+                                        )
+
+                                    [#input] => 1
+                                    [#theme] => checkbox
+                                    [#process] => Array
+                                        (
+                                            [0] => form_process_checkbox
+                                            [1] => ajax_process_form
+                                        )
+
+                                    [#theme_wrappers] => Array
+                                        (
+                                            [0] => form_element
+                                        )
+
+                                    [#pre_render] => Array
+                                        (
+                                            [0] => ctools_dependent_pre_render
+                                        )
+
+                                    [#defaults_loaded] => 1
+                                    [#tree] => 1
+                                    [#parents] => Array
+                                        (
+                                            [0] => list
+                                            [1] => 11
+                                        )
+
+                                    [#array_parents] => Array
+                                        (
+                                            [0] => users
+                                            [1] => list
+                                            [2] => 11
+                                        )
+
+                                    [#weight] => 0
+                                    [#processed] => 1
+                                    [#required] => 
+                                    [#id] => edit-list-11
+                                    [#name] => list[11]
+                                    [#value] => 11
+                                    [#needs_validation] => 1
+                                    [#checked] => 1
+                                    [#ajax_processed] => 
+                                    [#sorted] => 1
+                                    [#validated] => 1
+                                )
+
+                            [#sorted] => 1
+                            [#validated] => 1
+                        )
+
+                    [fields] => Array
+                        (
+                            [#type] => fieldset
+                            [#collapsible] => 1
+                            [#collapsed] => 1
+                            [#title] => Choose fields to show
+                            [user_data] => Array
+                                (
+                                    [#type] => checkboxes
+                                    [#title] => 
+                                    [#options] => Array
+                                        (
+                                            [name] => name
+                                            [mail] => mail
+                                            [role] => role
+                                            [status] => status
+                                            [created] => created
+                                        )
+
+                                    [#default_value] => Array
+                                        (
+                                            [0] => name
+                                            [1] => mail
+                                            [2] => role
+                                            [3] => status
+                                            [4] => created
+                                        )
+
+                                    [#ajax] => Array
+                                        (
+                                            [callback] => user_list_fields_callback
+                                            [wrapper] => user_list-list
+                                            [progress] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [#prefix] => <div style="max-height: 300px; overflow: auto"><table style="border: 0;"><tr><td valign="top" style="border: 0;">
+                                    [#suffix] => </td>
+                                    [#input] => 1
+                                    [#process] => Array
+                                        (
+                                            [0] => form_process_checkboxes
+                                        )
+
+                                    [#theme_wrappers] => Array
+                                        (
+                                            [0] => checkboxes
+                                        )
+
+                                    [#pre_render] => Array
+                                        (
+                                            [0] => form_pre_render_conditional_form_element
+                                            [1] => ctools_dependent_pre_render
+                                        )
+
+                                    [#defaults_loaded] => 1
+                                    [#tree] => 1
+                                    [#parents] => Array
+                                        (
+                                            [0] => user_data
+                                        )
+
+                                    [#array_parents] => Array
+                                        (
+                                            [0] => users
+                                            [1] => fields
+                                            [2] => user_data
+                                        )
+
+                                    [#weight] => 0
+                                    [#processed] => 1
+                                    [#required] => 
+                                    [#attributes] => Array
+                                        (
+                                        )
+
+                                    [#title_display] => before
+                                    [#id] => edit-user-data
+                                    [#name] => user_data
+                                    [#value] => Array
+                                        (
+                                            [name] => name
+                                            [mail] => mail
+                                            [role] => role
+                                            [status] => status
+                                            [created] => created
+                                        )
+
+                                    [#needs_validation] => 1
+                                    [name] => Array
+                                        (
+                                            [#type] => checkbox
+                                            [#title] => name
+                                            [#return_value] => name
+                                            [#default_value] => name
+                                            [#attributes] => Array
+                                                (
+                                                )
+
+                                            [#ajax] => Array
+                                                (
+                                                    [callback] => user_list_fields_callback
+                                                    [wrapper] => user_list-list
+                                                    [progress] => Array
+                                                        (
+                                                        )
+
+                                                    [event] => change
+                                                )
+
+                                            [#weight] => 0.001
+                                            [#input] => 1
+                                            [#theme] => checkbox
+                                            [#process] => Array
+                                                (
+                                                    [0] => form_process_checkbox
+                                                    [1] => ajax_process_form
+                                                )
+
+                                            [#theme_wrappers] => Array
+                                                (
+                                                    [0] => form_element
+                                                )
+
+                                            [#title_display] => after
+                                            [#pre_render] => Array
+                                                (
+                                                    [0] => ctools_dependent_pre_render
+                                                )
+
+                                            [#defaults_loaded] => 1
+                                            [#tree] => 1
+                                            [#parents] => Array
+                                                (
+                                                    [0] => user_data
+                                                    [1] => name
+                                                )
+
+                                            [#array_parents] => Array
+                                                (
+                                                    [0] => users
+                                                    [1] => fields
+                                                    [2] => user_data
+                                                    [3] => name
+                                                )
+
+                                            [#processed] => 1
+                                            [#required] => 
+                                            [#id] => edit-user-data-name
+                                            [#name] => user_data[name]
+                                            [#value] => name
+                                            [#needs_validation] => 1
+                                            [#checked] => 1
+                                            [#ajax_processed] => 1
+                                            [#attached] => Array
+                                                (
+                                                    [library] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => jquery.form
+                                                                )
+
+                                                            [1] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => drupal.ajax
+                                                                )
+
+                                                        )
+
+                                                    [js] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [type] => setting
+                                                                    [data] => Array
+                                                                        (
+                                                                            [ajax] => Array
+                                                                                (
+                                                                                    [edit-user-data-name] => Array
+                                                                                        (
+                                                                                            [callback] => user_list_fields_callback
+                                                                                            [wrapper] => user_list-list
+                                                                                            [progress] => Array
+                                                                                                (
+                                                                                                )
+
+                                                                                            [event] => change
+                                                                                            [url] => /futurict/?q=system/ajax
+                                                                                            [submit] => Array
+                                                                                                (
+                                                                                                    [_triggering_element_name] => user_data[name]
+                                                                                                )
+
+                                                                                        )
+
+                                                                                )
+
+                                                                        )
+
+                                                                )
+
+                                                        )
+
+                                                )
+
+                                            [#sorted] => 1
+                                            [#validated] => 1
+                                        )
+
+                                    [mail] => Array
+                                        (
+                                            [#type] => checkbox
+                                            [#title] => mail
+                                            [#return_value] => mail
+                                            [#default_value] => mail
+                                            [#attributes] => Array
+                                                (
+                                                )
+
+                                            [#ajax] => Array
+                                                (
+                                                    [callback] => user_list_fields_callback
+                                                    [wrapper] => user_list-list
+                                                    [progress] => Array
+                                                        (
+                                                        )
+
+                                                    [event] => change
+                                                )
+
+                                            [#weight] => 0.002
+                                            [#input] => 1
+                                            [#theme] => checkbox
+                                            [#process] => Array
+                                                (
+                                                    [0] => form_process_checkbox
+                                                    [1] => ajax_process_form
+                                                )
+
+                                            [#theme_wrappers] => Array
+                                                (
+                                                    [0] => form_element
+                                                )
+
+                                            [#title_display] => after
+                                            [#pre_render] => Array
+                                                (
+                                                    [0] => ctools_dependent_pre_render
+                                                )
+
+                                            [#defaults_loaded] => 1
+                                            [#tree] => 1
+                                            [#parents] => Array
+                                                (
+                                                    [0] => user_data
+                                                    [1] => mail
+                                                )
+
+                                            [#array_parents] => Array
+                                                (
+                                                    [0] => users
+                                                    [1] => fields
+                                                    [2] => user_data
+                                                    [3] => mail
+                                                )
+
+                                            [#processed] => 1
+                                            [#required] => 
+                                            [#id] => edit-user-data-mail
+                                            [#name] => user_data[mail]
+                                            [#value] => mail
+                                            [#needs_validation] => 1
+                                            [#checked] => 1
+                                            [#ajax_processed] => 1
+                                            [#attached] => Array
+                                                (
+                                                    [library] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => jquery.form
+                                                                )
+
+                                                            [1] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => drupal.ajax
+                                                                )
+
+                                                        )
+
+                                                    [js] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [type] => setting
+                                                                    [data] => Array
+                                                                        (
+                                                                            [ajax] => Array
+                                                                                (
+                                                                                    [edit-user-data-mail] => Array
+                                                                                        (
+                                                                                            [callback] => user_list_fields_callback
+                                                                                            [wrapper] => user_list-list
+                                                                                            [progress] => Array
+                                                                                                (
+                                                                                                )
+
+                                                                                            [event] => change
+                                                                                            [url] => /futurict/?q=system/ajax
+                                                                                            [submit] => Array
+                                                                                                (
+                                                                                                    [_triggering_element_name] => user_data[mail]
+                                                                                                )
+
+                                                                                        )
+
+                                                                                )
+
+                                                                        )
+
+                                                                )
+
+                                                        )
+
+                                                )
+
+                                            [#sorted] => 1
+                                            [#validated] => 1
+                                        )
+
+                                    [role] => Array
+                                        (
+                                            [#type] => checkbox
+                                            [#title] => role
+                                            [#return_value] => role
+                                            [#default_value] => role
+                                            [#attributes] => Array
+                                                (
+                                                )
+
+                                            [#ajax] => Array
+                                                (
+                                                    [callback] => user_list_fields_callback
+                                                    [wrapper] => user_list-list
+                                                    [progress] => Array
+                                                        (
+                                                        )
+
+                                                    [event] => change
+                                                )
+
+                                            [#weight] => 0.003
+                                            [#input] => 1
+                                            [#theme] => checkbox
+                                            [#process] => Array
+                                                (
+                                                    [0] => form_process_checkbox
+                                                    [1] => ajax_process_form
+                                                )
+
+                                            [#theme_wrappers] => Array
+                                                (
+                                                    [0] => form_element
+                                                )
+
+                                            [#title_display] => after
+                                            [#pre_render] => Array
+                                                (
+                                                    [0] => ctools_dependent_pre_render
+                                                )
+
+                                            [#defaults_loaded] => 1
+                                            [#tree] => 1
+                                            [#parents] => Array
+                                                (
+                                                    [0] => user_data
+                                                    [1] => role
+                                                )
+
+                                            [#array_parents] => Array
+                                                (
+                                                    [0] => users
+                                                    [1] => fields
+                                                    [2] => user_data
+                                                    [3] => role
+                                                )
+
+                                            [#processed] => 1
+                                            [#required] => 
+                                            [#id] => edit-user-data-role
+                                            [#name] => user_data[role]
+                                            [#value] => role
+                                            [#needs_validation] => 1
+                                            [#checked] => 1
+                                            [#ajax_processed] => 1
+                                            [#attached] => Array
+                                                (
+                                                    [library] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => jquery.form
+                                                                )
+
+                                                            [1] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => drupal.ajax
+                                                                )
+
+                                                        )
+
+                                                    [js] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [type] => setting
+                                                                    [data] => Array
+                                                                        (
+                                                                            [ajax] => Array
+                                                                                (
+                                                                                    [edit-user-data-role] => Array
+                                                                                        (
+                                                                                            [callback] => user_list_fields_callback
+                                                                                            [wrapper] => user_list-list
+                                                                                            [progress] => Array
+                                                                                                (
+                                                                                                )
+
+                                                                                            [event] => change
+                                                                                            [url] => /futurict/?q=system/ajax
+                                                                                            [submit] => Array
+                                                                                                (
+                                                                                                    [_triggering_element_name] => user_data[role]
+                                                                                                )
+
+                                                                                        )
+
+                                                                                )
+
+                                                                        )
+
+                                                                )
+
+                                                        )
+
+                                                )
+
+                                            [#sorted] => 1
+                                            [#validated] => 1
+                                        )
+
+                                    [status] => Array
+                                        (
+                                            [#type] => checkbox
+                                            [#title] => status
+                                            [#return_value] => status
+                                            [#default_value] => status
+                                            [#attributes] => Array
+                                                (
+                                                )
+
+                                            [#ajax] => Array
+                                                (
+                                                    [callback] => user_list_fields_callback
+                                                    [wrapper] => user_list-list
+                                                    [progress] => Array
+                                                        (
+                                                        )
+
+                                                    [event] => change
+                                                )
+
+                                            [#weight] => 0.004
+                                            [#input] => 1
+                                            [#theme] => checkbox
+                                            [#process] => Array
+                                                (
+                                                    [0] => form_process_checkbox
+                                                    [1] => ajax_process_form
+                                                )
+
+                                            [#theme_wrappers] => Array
+                                                (
+                                                    [0] => form_element
+                                                )
+
+                                            [#title_display] => after
+                                            [#pre_render] => Array
+                                                (
+                                                    [0] => ctools_dependent_pre_render
+                                                )
+
+                                            [#defaults_loaded] => 1
+                                            [#tree] => 1
+                                            [#parents] => Array
+                                                (
+                                                    [0] => user_data
+                                                    [1] => status
+                                                )
+
+                                            [#array_parents] => Array
+                                                (
+                                                    [0] => users
+                                                    [1] => fields
+                                                    [2] => user_data
+                                                    [3] => status
+                                                )
+
+                                            [#processed] => 1
+                                            [#required] => 
+                                            [#id] => edit-user-data-status
+                                            [#name] => user_data[status]
+                                            [#value] => status
+                                            [#needs_validation] => 1
+                                            [#checked] => 1
+                                            [#ajax_processed] => 1
+                                            [#attached] => Array
+                                                (
+                                                    [library] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => jquery.form
+                                                                )
+
+                                                            [1] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => drupal.ajax
+                                                                )
+
+                                                        )
+
+                                                    [js] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [type] => setting
+                                                                    [data] => Array
+                                                                        (
+                                                                            [ajax] => Array
+                                                                                (
+                                                                                    [edit-user-data-status] => Array
+                                                                                        (
+                                                                                            [callback] => user_list_fields_callback
+                                                                                            [wrapper] => user_list-list
+                                                                                            [progress] => Array
+                                                                                                (
+                                                                                                )
+
+                                                                                            [event] => change
+                                                                                            [url] => /futurict/?q=system/ajax
+                                                                                            [submit] => Array
+                                                                                                (
+                                                                                                    [_triggering_element_name] => user_data[status]
+                                                                                                )
+
+                                                                                        )
+
+                                                                                )
+
+                                                                        )
+
+                                                                )
+
+                                                        )
+
+                                                )
+
+                                            [#sorted] => 1
+                                            [#validated] => 1
+                                        )
+
+                                    [created] => Array
+                                        (
+                                            [#type] => checkbox
+                                            [#title] => created
+                                            [#return_value] => created
+                                            [#default_value] => created
+                                            [#attributes] => Array
+                                                (
+                                                )
+
+                                            [#ajax] => Array
+                                                (
+                                                    [callback] => user_list_fields_callback
+                                                    [wrapper] => user_list-list
+                                                    [progress] => Array
+                                                        (
+                                                        )
+
+                                                    [event] => change
+                                                )
+
+                                            [#weight] => 0.005
+                                            [#input] => 1
+                                            [#theme] => checkbox
+                                            [#process] => Array
+                                                (
+                                                    [0] => form_process_checkbox
+                                                    [1] => ajax_process_form
+                                                )
+
+                                            [#theme_wrappers] => Array
+                                                (
+                                                    [0] => form_element
+                                                )
+
+                                            [#title_display] => after
+                                            [#pre_render] => Array
+                                                (
+                                                    [0] => ctools_dependent_pre_render
+                                                )
+
+                                            [#defaults_loaded] => 1
+                                            [#tree] => 1
+                                            [#parents] => Array
+                                                (
+                                                    [0] => user_data
+                                                    [1] => created
+                                                )
+
+                                            [#array_parents] => Array
+                                                (
+                                                    [0] => users
+                                                    [1] => fields
+                                                    [2] => user_data
+                                                    [3] => created
+                                                )
+
+                                            [#processed] => 1
+                                            [#required] => 
+                                            [#id] => edit-user-data-created
+                                            [#name] => user_data[created]
+                                            [#value] => created
+                                            [#needs_validation] => 1
+                                            [#checked] => 1
+                                            [#ajax_processed] => 1
+                                            [#attached] => Array
+                                                (
+                                                    [library] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => jquery.form
+                                                                )
+
+                                                            [1] => Array
+                                                                (
+                                                                    [0] => system
+                                                                    [1] => drupal.ajax
+                                                                )
+
+                                                        )
+
+                                                    [js] => Array
+                                                        (
+                                                            [0] => Array
+                                                                (
+                                                                    [type] => setting
+                                                                    [data] => Array
+                                                                        (
+                                                                            [ajax] => Array
+                                                                                (
+                                                                                    [edit-user-data-created] => Array
+                                                                                        (
+                                                                                            [callback] => user_list_fields_callback
+                                                                                            [wrapper] => user_list-list
+                                                                                            [progress] => Array
+                                                                                                (
+                                                                                                )
+
+                                                                                            [event] => change
+                                                                                            [url] => /futurict/?q=system/ajax
+                                                                                            [submit] => Array
+                                                                                                (
+                                                                                                    [_triggering_element_name] => user_data[created]
+                                                                                                )
+
+                                                                                        )
+
+                                                                                )
+
+                                                                        )
+
+                                                                )
+
+                                                        )
+
+                                                )
+
+                                            [#sorted] => 1
+                                            [#validated] => 1
+                                        )
+
+                                    [#validated] => 1
+                                )
+
+                            [field_list] => Array
+                                (
+                                    [#type] => checkboxes
+                                    [#title] => 
+                                    [#options] => Array
+                                        (
+                                        )
+
+                                    [#default_value] => Array
+                                        (
+                                        )
+
+                                    [#ajax] => Array
+                                        (
+                                            [callback] => user_list_fields_callback
+                                            [wrapper] => user_list-list
+                                            [progress] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [#prefix] => <td valign="top" style="border: 0;">
+                                    [#suffix] => </td></tr></table></div>
+                                    [#input] => 1
+                                    [#process] => Array
+                                        (
+                                            [0] => form_process_checkboxes
+                                        )
+
+                                    [#theme_wrappers] => Array
+                                        (
+                                            [0] => checkboxes
+                                        )
+
+                                    [#pre_render] => Array
+                                        (
+                                            [0] => form_pre_render_conditional_form_element
+                                            [1] => ctools_dependent_pre_render
+                                        )
+
+                                    [#defaults_loaded] => 1
+                                    [#tree] => 1
+                                    [#parents] => Array
+                                        (
+                                            [0] => field_list
+                                        )
+
+                                    [#array_parents] => Array
+                                        (
+                                            [0] => users
+                                            [1] => fields
+                                            [2] => field_list
+                                        )
+
+                                    [#weight] => 0.001
+                                    [#processed] => 1
+                                    [#required] => 
+                                    [#attributes] => Array
+                                        (
+                                        )
+
+                                    [#title_display] => before
+                                    [#id] => edit-field-list
+                                    [#name] => field_list
+                                    [#value] => Array
+                                        (
+                                        )
+
+                                    [#needs_validation] => 1
+                                    [#sorted] => 1
+                                    [#validated] => 1
+                                )
+
+                            [#value] => 
+                            [#process] => Array
+                                (
+                                    [0] => form_process_fieldset
+                                    [1] => ajax_process_form
+                                )
+
+                            [#pre_render] => Array
+                                (
+                                    [0] => form_pre_render_fieldset
+                                    [1] => ctools_dependent_pre_render
+                                )
+
+                            [#theme_wrappers] => Array
+                                (
+                                    [0] => fieldset
+                                )
+
+                            [#defaults_loaded] => 1
+                            [#tree] => 
+                            [#parents] => Array
+                                (
+                                    [0] => fields
+                                )
+
+                            [#array_parents] => Array
+                                (
+                                    [0] => users
+                                    [1] => fields
+                                )
+
+                            [#weight] => 0.001
+                            [#processed] => 1
+                            [#required] => 
+                            [#attributes] => Array
+                                (
+                                    [class] => Array
+                                        (
+                                            [0] => collapsible
+                                            [1] => collapsed
+                                        )
+
+                                )
+
+                            [#title_display] => before
+                            [#id] => edit-fields
+                            [#groups] => Array
+                                (
+                                    [users] => Array
+                                        (
+                                            [#group_exists] => 1
+                                        )
+
+                                    [fields] => Array
+                                        (
+                                            [#group_exists] => 1
+                                        )
+
+                                )
+
+                            [#attached] => Array
+                                (
+                                    [library] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [0] => system
+                                                    [1] => drupal.form
+                                                )
+
+                                            [1] => Array
+                                                (
+                                                    [0] => system
+                                                    [1] => drupal.collapse
+                                                )
+
+                                        )
+
+                                )
+
+                            [#ajax_processed] => 
+                            [#sorted] => 1
+                            [#validated] => 1
+                        )
+
+                    [submit] => Array
+                        (
+                            [#type] => submit
+                            [#value] => Enter the message >>
+                            [#submit] => Array
+                                (
+                                    [0] => user_list_form_submit
+                                )
+
+                            [#validate] => Array
+                                (
+                                    [0] => user_list_form_validate
+                                )
+
+                            [#prefix] => <table id="actions-table"><tr><td>
+                            [#input] => 1
+                            [#name] => op
+                            [#button_type] => submit
+                            [#executes_submit_callback] => 1
+                            [#limit_validation_errors] => 
+                            [#process] => Array
+                                (
+                                    [0] => ajax_process_form
+                                )
+
+                            [#theme_wrappers] => Array
+                                (
+                                    [0] => button
+                                )
+
+                            [#defaults_loaded] => 1
+                            [#tree] => 
+                            [#parents] => Array
+                                (
+                                    [0] => submit
+                                )
+
+                            [#array_parents] => Array
+                                (
+                                    [0] => users
+                                    [1] => submit
+                                )
+
+                            [#weight] => 0.002
+                            [#processed] => 1
+                            [#required] => 
+                            [#attributes] => Array
+                                (
+                                )
+
+                            [#title_display] => before
+                            [#id] => edit-submit
+                            [#ajax_processed] => 
+                            [#sorted] => 1
+                            [#validated] => 1
+                        )
+
+                    [export] => Array
+                        (
+                            [#type] => submit
+                            [#value] => Export to CSV
+                            [#submit] => Array
+                                (
+                                    [0] => user_list_export_submit
+                                )
+
+                            [#validate] => Array
+                                (
+                                    [0] => user_list_form_validate
+                                )
+
+                            [#suffix] => <input type="button" class="form-submit" value="LS Map" onclick="lsSearch();"/></td>
+                            [#input] => 1
+                            [#name] => op
+                            [#button_type] => submit
+                            [#executes_submit_callback] => 1
+                            [#limit_validation_errors] => 
+                            [#process] => Array
+                                (
+                                    [0] => ajax_process_form
+                                )
+
+                            [#theme_wrappers] => Array
+                                (
+                                    [0] => button
+                                )
+
+                            [#defaults_loaded] => 1
+                            [#tree] => 
+                            [#parents] => Array
+                                (
+                                    [0] => export
+                                )
+
+                            [#array_parents] => Array
+                                (
+                                    [0] => users
+                                    [1] => export
+                                )
+
+                            [#weight] => 0.003
+                            [#processed] => 1
+                            [#required] => 
+                            [#attributes] => Array
+                                (
+                                )
+
+                            [#title_display] => before
+                            [#id] => edit-export
+                            [#ajax_processed] => 
+                            [#sorted] => 1
+                            [#validated] => 1
+                        )
+
+                    [ls_progress] => Array
+                        (
+                            [#type] => container
+                            [#attributes] => Array
+                                (
+                                    [id] => watchProgress
+                                )
+
+                            [#theme_wrappers] => Array
+                                (
+                                    [0] => container
+                                )
+
+                            [#process] => Array
+                                (
+                                    [0] => form_process_container
+                                )
+
+                            [#defaults_loaded] => 1
+                            [#tree] => 
+                            [#parents] => Array
+                                (
+                                    [0] => ls_progress
+                                )
+
+                            [#array_parents] => Array
+                                (
+                                    [0] => users
+                                    [1] => ls_progress
+                                )
+
+                            [#weight] => 0.004
+                            [#processed] => 1
+                            [#required] => 
+                            [#title_display] => before
+                            [#id] => edit-ls-progress
+                            [#sorted] => 1
+                            [#validated] => 1
+                        )
+
+                    [ls_map] => Array
+                        (
+                            [#type] => container
+                            [#attributes] => Array
+                                (
+                                    [id] => mapcontainer
+                                    [style] => width:700px; height:300px
+                                )
+
+                            [#theme_wrappers] => Array
+                                (
+                                    [0] => container
+                                )
+
+                            [#process] => Array
+                                (
+                                    [0] => form_process_container
+                                )
+
+                            [#defaults_loaded] => 1
+                            [#tree] => 
+                            [#parents] => Array
+                                (
+                                    [0] => ls_map
+                                )
+
+                            [#array_parents] => Array
+                                (
+                                    [0] => users
+                                    [1] => ls_map
+                                )
+
+                            [#weight] => 0.005
+                            [#processed] => 1
+                            [#required] => 
+                            [#title_display] => before
+                            [#id] => edit-ls-map
+                            [#sorted] => 1
+                            [#validated] => 1
+                        )
+
+                    [ls_results] => Array
+                        (
+                            [#type] => container
+                            [#attributes] => Array
+                                (
+                                    [id] => searchResults
+                                )
+
+                            [#theme_wrappers] => Array
+                                (
+                                    [0] => container
+                                )
+
+                            [#process] => Array
+                                (
+                                    [0] => form_process_container
+                                )
+
+                            [#defaults_loaded] => 1
+                            [#tree] => 
+                            [#parents] => Array
+                                (
+                                    [0] => ls_results
+                                )
+
+                            [#array_parents] => Array
+                                (
+                                    [0] => users
+                                    [1] => ls_results
+                                )
+
+                            [#weight] => 0.006
+                            [#processed] => 1
+                            [#required] => 
+                            [#title_display] => before
+                            [#id] => edit-ls-results
+                            [#sorted] => 1
+                            [#validated] => 1
+                        )
+
+                    [#value] => 
+                    [#process] => Array
+                        (
+                            [0] => form_process_fieldset
+                            [1] => ajax_process_form
+                        )
+
+                    [#pre_render] => Array
+                        (
+                            [0] => form_pre_render_fieldset
+                            [1] => ctools_dependent_pre_render
+                        )
+
+                    [#theme_wrappers] => Array
+                        (
+                            [0] => fieldset
+                        )
+
+                    [#defaults_loaded] => 1
+                    [#tree] => 
+                    [#parents] => Array
+                        (
+                            [0] => users
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => users
+                        )
+
+                    [#weight] => 0
+                    [#processed] => 1
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                            [class] => Array
+                                (
+                                    [0] => collapsible
+                                )
+
+                        )
+
+                    [#title_display] => before
+                    [#id] => edit-users
+                    [#groups] => Array
+                        (
+                            [users] => Array
+                                (
+                                    [#group_exists] => 1
+                                )
+
+                            [fields] => Array
+                                (
+                                    [#group_exists] => 1
+                                )
+
+                        )
+
+                    [#attached] => Array
+                        (
+                            [library] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [0] => system
+                                            [1] => drupal.form
+                                        )
+
+                                    [1] => Array
+                                        (
+                                            [0] => system
+                                            [1] => drupal.collapse
+                                        )
+
+                                )
+
+                        )
+
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [#form_id] => user_list_form
+            [#type] => form
+            [#build_id] => form-g_36FUfg9gb-SVTg1r5iFmP1bTX8ZmQ4OxFqkDWDaHc
+            [form_build_id] => Array
+                (
+                    [#type] => hidden
+                    [#value] => form-g_36FUfg9gb-SVTg1r5iFmP1bTX8ZmQ4OxFqkDWDaHc
+                    [#id] => form-g_36FUfg9gb-SVTg1r5iFmP1bTX8ZmQ4OxFqkDWDaHc
+                    [#name] => form_build_id
+                    [#input] => 1
+                    [#process] => Array
+                        (
+                            [0] => ajax_process_form
+                        )
+
+                    [#theme] => hidden
+                    [#defaults_loaded] => 1
+                    [#tree] => 
+                    [#parents] => Array
+                        (
+                            [0] => form_build_id
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => form_build_id
+                        )
+
+                    [#weight] => 0.001
+                    [#processed] => 1
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#title_display] => before
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [#token] => user_list_form
+            [form_token] => Array
+                (
+                    [#id] => edit-user-list-form-form-token
+                    [#type] => token
+                    [#default_value] => fB16BhBAPOr3zBeYLZ1-s_lfi--fQhpEvimt9yHZZm4
+                    [#input] => 1
+                    [#theme] => hidden
+                    [#defaults_loaded] => 1
+                    [#tree] => 
+                    [#parents] => Array
+                        (
+                            [0] => form_token
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => form_token
+                        )
+
+                    [#weight] => 0.002
+                    [#processed] => 
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#title_display] => before
+                    [#name] => form_token
+                    [#value] => fB16BhBAPOr3zBeYLZ1-s_lfi--fQhpEvimt9yHZZm4
+                    [#needs_validation] => 1
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [form_id] => Array
+                (
+                    [#type] => hidden
+                    [#value] => user_list_form
+                    [#id] => edit-user-list-form
+                    [#input] => 1
+                    [#process] => Array
+                        (
+                            [0] => ajax_process_form
+                        )
+
+                    [#theme] => hidden
+                    [#defaults_loaded] => 1
+                    [#tree] => 
+                    [#parents] => Array
+                        (
+                            [0] => form_id
+                        )
+
+                    [#array_parents] => Array
+                        (
+                            [0] => form_id
+                        )
+
+                    [#weight] => 0.003
+                    [#processed] => 1
+                    [#required] => 
+                    [#attributes] => Array
+                        (
+                        )
+
+                    [#title_display] => before
+                    [#name] => form_id
+                    [#ajax_processed] => 
+                    [#sorted] => 1
+                    [#validated] => 1
+                )
+
+            [#id] => user-list-form
+            [#method] => post
+            [#action] => /futurict/?q=visualscience/user_list
+            [#theme_wrappers] => Array
+                (
+                    [0] => form
+                )
+
+            [#tree] => 
+            [#parents] => Array
+                (
+                )
+
+            [#validate] => Array
+                (
+                    [0] => user_list_form_validate
+                )
+
+            [#submit] => Array
+                (
+                    [0] => user_list_form_submit
+                )
+
+            [#theme] => Array
+                (
+                    [0] => user_list_form
+                )
+
+            [#cache_token] => q4be969QrZg0d9-a8QwuiUlMb9KLoQNwrsQfw3Z_NvM
+            [#processed] => 
+            [#defaults_loaded] => 1
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#array_parents] => Array
+                (
+                )
+
+            [#sorted] => 1
+            [#validated] => 1
+        )
+
+    [triggering_element] => Array
+        (
+            [#type] => submit
+            [#value] => Enter the message >>
+            [#submit] => Array
+                (
+                    [0] => user_list_form_submit
+                )
+
+            [#validate] => Array
+                (
+                    [0] => user_list_form_validate
+                )
+
+            [#prefix] => <table id="actions-table"><tr><td>
+            [#input] => 1
+            [#name] => op
+            [#button_type] => submit
+            [#executes_submit_callback] => 1
+            [#limit_validation_errors] => 
+            [#process] => Array
+                (
+                    [0] => ajax_process_form
+                )
+
+            [#theme_wrappers] => Array
+                (
+                    [0] => button
+                )
+
+            [#defaults_loaded] => 1
+            [#tree] => 
+            [#parents] => Array
+                (
+                    [0] => submit
+                )
+
+            [#array_parents] => Array
+                (
+                    [0] => users
+                    [1] => submit
+                )
+
+            [#weight] => 0.002
+            [#processed] => 
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#id] => edit-submit
+        )
+
+    [validate_handlers] => Array
+        (
+            [0] => user_list_form_validate
+        )
+
+    [submit_handlers] => Array
+        (
+            [0] => user_list_form_submit
+        )
+
+    [clicked_button] => Array
+        (
+            [#type] => submit
+            [#value] => Enter the message >>
+            [#submit] => Array
+                (
+                    [0] => user_list_form_submit
+                )
+
+            [#validate] => Array
+                (
+                    [0] => user_list_form_validate
+                )
+
+            [#prefix] => <table id="actions-table"><tr><td>
+            [#input] => 1
+            [#name] => op
+            [#button_type] => submit
+            [#executes_submit_callback] => 1
+            [#limit_validation_errors] => 
+            [#process] => Array
+                (
+                    [0] => ajax_process_form
+                )
+
+            [#theme_wrappers] => Array
+                (
+                    [0] => button
+                )
+
+            [#defaults_loaded] => 1
+            [#tree] => 
+            [#parents] => Array
+                (
+                    [0] => submit
+                )
+
+            [#array_parents] => Array
+                (
+                    [0] => users
+                    [1] => submit
+                )
+
+            [#weight] => 0.002
+            [#processed] => 
+            [#required] => 
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#id] => edit-submit
+        )
+
+    [page_values] => Array
+        (
+            [1] => Array
+                (
+                    [list] => Array
+                        (
+                            [11] => 11
+                        )
+
+                    [user_data] => Array
+                        (
+                            [name] => name
+                            [mail] => mail
+                            [role] => role
+                            [status] => status
+                            [created] => created
+                        )
+
+                    [field_list] => Array
+                        (
+                        )
+
+                    [submit] => Enter the message >>
+                    [export] => Export to CSV
+                    [form_build_id] => form-g_36FUfg9gb-SVTg1r5iFmP1bTX8ZmQ4OxFqkDWDaHc
+                    [form_token] => fB16BhBAPOr3zBeYLZ1-s_lfi--fQhpEvimt9yHZZm4
+                    [form_id] => user_list_form
+                    [op] => Enter the message >>
+                )
+
+        )
+
+    [page_num] => 2
+)
