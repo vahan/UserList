@@ -1,25 +1,27 @@
-function lsSearch() {
-	var livingscience;
-	if(!livingscience) 
+var livingscience = null;
+
+function lsSearch(idSuffix) {
+	if(livingscience == null) 
 	{
 		livingscience = new ch.ethz.livingscience.gwtclient.api.LivingScienceSearch();
-		livingscience.setMap("mapcontainer");
+		// TODO this "-1" should be replaced by a count, because why might want to have maps or whataver in multiple windows within a dialog
+		livingscience.setMap("mapcontainer-"+idSuffix+"-1");
 	}
 	if (!livingscience) return;
-	document.getElementById("watchProgress").innerHTML = "Please wait...";
+	document.getElementById("watchProgress-"+idSuffix+"-1").innerHTML = "Please wait...";
 	
 	//Create a search query from the selected users
 	var query = "";
 	//userListCheckboxes = jQuery(':checkbox[id|="edit-list"]:checked').each(function(index){
 		userListCheckboxes = jQuery(':checkbox:checked').each(function(index){
-		query += jQuery(this).parent().parent().next().text();
+		// TODO handle this part to have a better search quiery. Look for the username/first name/last name
+		query += jQuery(this).parent().parent().next().text() + " " +jQuery(this).parent().parent().next().next().next().text() + " " + jQuery(this).parent().parent().next().next().next().next().text();
 		query += " ";
 	});
-	
 	console.log("query: " + query);
 	livingscience.search(query, function(publications) {
 		//console.log("lavash");
-		document.getElementById("watchProgress").innerHTML = "Enjoy ;)";
+		document.getElementById("watchProgress-"+idSuffix+"-1").innerHTML = "<span>Results for '"+query+"'</span>";
 		var html = "";
 		if (publications)
 		{
@@ -40,6 +42,6 @@ function lsSearch() {
 				html += "</p>";
 			}
 		}
-		document.getElementById("searchResults").innerHTML = html;
+		document.getElementById("searchResults-"+idSuffix+"-1").innerHTML = html;
 	});
 }

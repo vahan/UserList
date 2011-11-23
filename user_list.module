@@ -43,6 +43,7 @@ require_once 'includes/user_list.utils.inc';
  * TODO: feature 6: we will need to test it with huge amount of users to see how well it performs...
  * DONE: feature 7: userlist/export/ create automatic exports for roles
  * FIXED: BUG when loading search on urls with ?q
+ * TODO: some style issues with livingscience.js. Background turnes white
  */
 
 
@@ -64,9 +65,13 @@ function user_list_science_title() {
  * @param array $list	the search results to be rendered and shown in the tab
  */
 function user_list_science_tab($list) {
+  if (!isset($_SESSION["searchNumber"])) {
+  	$_SESSION["searchNumber"] = 0;
+  }
+  
   drupal_add_js('http://livingscience.ethz.ch/livingscience/livingscience/livingscience.nocache.js', 'external'); //TODO: js adds somehow wrongly!
   drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
-  
+ 
   $paginated = FALSE;
   $header = "User List";
   $empty_msg = "There are currently no users in this category to list.";
@@ -74,20 +79,21 @@ function user_list_science_tab($list) {
   $element = 0;
   
   drupal_add_css(drupal_get_path('module', 'user_list') .'/user_list.css');
-  $output = '<div id="visualscience-user_list">';
+  $output = '<div class="visualscience-user_list" id="visualscience-user_list-';
+  $output .= $_SESSION["searchNumber"].'">';
   if ($header) {
-    $output .= '  <h3>'. $header ."</h3>\n  ";
+    $output .= '<h3>'.$header.'</h3>';
   }
-  $output .= "  <div class=\"content\">\n    ";
+  $output .= '<div class="content">';
   
   $output .= drupal_render(drupal_get_form('user_list_form', $list));
   if ($paginated) {
     $output .= theme('pager', array(NULL, $number, $element));
   }
-  $output .= "</div>\n";
-  $output .= "  </div>\n   </div>\n";
-  
-  return $output;;
+  $output .= "</div>";
+  $output .= "</div>";
+//  $_SESSION["searchNumber"] = $_SESSION["searchNumber"] + 1;
+  return $output;
 }
 
 /**
