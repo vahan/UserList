@@ -1,27 +1,29 @@
-var livingscience = null;
+var lsObject = new Array();
 
 function lsSearch(idSuffix) {
-	if(livingscience == null) 
+	if(lsObject[idSuffix] == null)
 	{
-		livingscience = new ch.ethz.livingscience.gwtclient.api.LivingScienceSearch();
+		lsObject[idSuffix] = new ch.ethz.livingscience.gwtclient.api.LivingScienceSearch();
 		// TODO this "-1" should be replaced by a count, because why might want to have maps or whataver in multiple windows within a dialog
-		livingscience.setMap("mapcontainer-"+idSuffix+"-1");
+		lsObject[idSuffix].setMap("mapcontainer-"+idSuffix+"-1");
 	}
-	if (!livingscience) return;
+	if (!lsObject[idSuffix]) return;
 	document.getElementById("watchProgress-"+idSuffix+"-1").innerHTML = "Please wait...";
+	document.getElementById("searchResults-"+idSuffix+"-1").innerHTML = "";
 	
 	//Create a search query from the selected users
-	var query = "";
+	var query = new Array();
+	query[idSuffix] = "";
 	//userListCheckboxes = jQuery(':checkbox[id|="edit-list"]:checked').each(function(index){
-		userListCheckboxes = jQuery(':checkbox:checked').each(function(index){
+		userListCheckboxes = jQuery("#visualscience-user_list-"+idSuffix).find(':checkbox:checked').each(function(index){
 		// TODO handle this part to have a better search quiery. Look for the username/first name/last name
-		query += jQuery(this).parent().parent().next().text() + " " +jQuery(this).parent().parent().next().next().next().text() + " " + jQuery(this).parent().parent().next().next().next().next().text();
-		query += " ";
+		query[idSuffix] += jQuery(this).parent().parent().next().next().next().text() + " " + jQuery(this).parent().parent().next().next().next().next().text();
+		query[idSuffix] += " ";
 	});
-	console.log("query: " + query);
-	livingscience.search(query, function(publications) {
+	console.log("query: " + query[idSuffix]);
+	lsObject[idSuffix].search(query[idSuffix], function(publications) {
 		//console.log("lavash");
-		document.getElementById("watchProgress-"+idSuffix+"-1").innerHTML = "<span>Results for '"+query+"'</span>";
+		document.getElementById("watchProgress-"+idSuffix+"-1").innerHTML = "<span>Results for '"+query[idSuffix]+"'</span>";
 		var html = "";
 		if (publications)
 		{

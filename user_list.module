@@ -64,14 +64,13 @@ function user_list_science_title() {
  * Returns HTML to show in the User List tab
  * @param array $list	the search results to be rendered and shown in the tab
  */
-function user_list_science_tab($list) {
-  if (!isset($_SESSION["searchNumber"])) {
-  	$_SESSION["searchNumber"] = 0;
-  }
-  
+function user_list_science_tab($list, $idSuffix) {
+	
   drupal_add_js('http://livingscience.ethz.ch/livingscience/livingscience/livingscience.nocache.js', 'external'); //TODO: js adds somehow wrongly!
   drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
- 
+  // I don't know why, but I have to add the js once again in order for it to work
+  drupal_add_js(drupal_get_path('module', 'visualscience') .'/visualscience.jquery.layout.js');
+  
   $paginated = FALSE;
   $header = "User List";
   $empty_msg = "There are currently no users in this category to list.";
@@ -80,20 +79,34 @@ function user_list_science_tab($list) {
   
   drupal_add_css(drupal_get_path('module', 'user_list') .'/user_list.css');
   $output = '<div class="visualscience-user_list" id="visualscience-user_list-';
-  $output .= $_SESSION["searchNumber"].'">';
+  $output .= $idSuffix.'">';
   if ($header) {
     $output .= '<h3>'.$header.'</h3>';
   }
   $output .= '<div class="content">';
   
-  $output .= drupal_render(drupal_get_form('user_list_form', $list));
+  $output .= drupal_render(drupal_get_form('user_list_form_'.$idSuffix, $list, $idSuffix));
   if ($paginated) {
     $output .= theme('pager', array(NULL, $number, $element));
   }
   $output .= "</div>";
   $output .= "</div>";
-//  $_SESSION["searchNumber"] = $_SESSION["searchNumber"] + 1;
   return $output;
+}
+
+/**
+ * 
+ * Function to take care of having multiple instances of the same form on the page
+ * @param $form_id the id of the form
+ * @param $args arguments
+ */
+function user_list_forms($form_id, $args) {
+  if (strpos($form_id, 'user_list_form') !== FALSE) {
+      $forms[$form_id] = array(
+        'callback' => 'user_list_form',
+      );
+      return $forms;
+   }
 }
 
 /**
@@ -119,7 +132,7 @@ function user_list_update_tab($list) {
  * TODO:
  * @param array $vars	contains arguments as an array
  */
-function theme_user_list_list($list, $paginated = FALSE) {
+function theme_user_list_list($list, $idSuffix, $paginated = FALSE) {
   
-  return user_list_science_tab($list, $paginated);
+  return user_list_science_tab($list, $idSuffix, $paginated);
 }

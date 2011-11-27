@@ -18,8 +18,10 @@
  * @return           the created form
  * @author Vahan, 25.03.2011
  */
-function user_list_form($form, &$form_state, $users) {
+function user_list_form($form, &$form_state, $users, $idSuffix) {
   global $user;
+  
+ // $idSuffix = substr($formId, strpos($formId, "list_form_") + strlen("list_form_"));
   
   if (isset($form_state['page_num']) && $form_state['page_num'] == 2) {
       return user_list_form_message($form, $form_state, $users);
@@ -90,16 +92,12 @@ function user_list_form($form, &$form_state, $users) {
     '#prefix' => '<table id="actions-table"><tr><td>',
   );
   
-  if (!isset($_SESSION["searchNumber"])) {
-  	$_SESSION["searchNumber"] = 0;
-  }
-  
   $form['users']['export'] = array(
   	'#type' => 'submit',
   	'#value' => t('Export to CSV'),
   	'#submit' => array('user_list_export_submit'),
   	'#validate' => array('user_list_form_validate'),
-    '#suffix' => '<input id="ls-map-btn-'.$_SESSION["searchNumber"].'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/></td></tr></table>',
+    '#suffix' => '<input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/></td></tr></table>',
   );
 /*  
   $form['users']['ls_progress'] = array(
