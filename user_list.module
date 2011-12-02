@@ -65,11 +65,17 @@ function user_list_science_title() {
  * @param array $list	the search results to be rendered and shown in the tab
  */
 function user_list_science_tab($list, $idSuffix) {
+  drupal_add_library('system', 'ui.autocomplete');
+  drupal_add_library('system', 'ui.datepicker');
+  drupal_add_library('system', 'ui.dialog');
 	
   drupal_add_js('http://livingscience.ethz.ch/livingscience/livingscience/livingscience.nocache.js', 'external'); //TODO: js adds somehow wrongly!
   drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
   // I don't know why, but I have to add the js once again in order for it to work
   drupal_add_js(drupal_get_path('module', 'visualscience') .'/visualscience.jquery.layout.js');
+  drupal_add_js(drupal_get_path('module', 'visualscience') .'/visualscience.js');
+  drupal_add_js(drupal_get_path('module', 'visualscience') .'/visualscience.jquery.dialog-extend.js');
+  
   
   $paginated = FALSE;
   $header = "User List";

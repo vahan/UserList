@@ -1,4 +1,5 @@
 var lsObject = new Array();
+var query = new Array();
 
 function lsSearch(idSuffix) {
 	if(lsObject[idSuffix] == null)
@@ -12,10 +13,9 @@ function lsSearch(idSuffix) {
 	document.getElementById("searchResults-"+idSuffix+"-1").innerHTML = "";
 	
 	//Create a search query from the selected users
-	var query = new Array();
 	query[idSuffix] = "";
 	//userListCheckboxes = jQuery(':checkbox[id|="edit-list"]:checked').each(function(index){
-		userListCheckboxes = jQuery("#visualscience-user_list-"+idSuffix).find(':checkbox:checked').each(function(index){
+		userListCheckboxes = jQuery("#user_list-list-"+idSuffix).find(':checkbox:checked').each(function(index){
 		// TODO handle this part to have a better search quiery. Look for the username/first name/last name
 		query[idSuffix] += jQuery(this).parent().parent().next().next().next().text() + " " + jQuery(this).parent().parent().next().next().next().next().text();
 		query[idSuffix] += " ";
