@@ -18,8 +18,10 @@
  * @return           the created form
  * @author Vahan, 25.03.2011
  */
-function user_list_form($form, &$form_state, $users) {
+function user_list_form($form, &$form_state, $users, $idSuffix) {
   global $user;
+  
+ // $idSuffix = substr($formId, strpos($formId, "list_form_") + strlen("list_form_"));
   
   if (isset($form_state['page_num']) && $form_state['page_num'] == 2) {
       return user_list_form_message($form, $form_state, $users);
@@ -34,7 +36,7 @@ function user_list_form($form, &$form_state, $users) {
     '#prefix' => '<div id="visualscience_user_list">',
     '#suffix' => '</div>',
   );
-  $form['users']['list'] = user_list_get_user_list($users);
+  $form['users']['list'] = user_list_get_user_list($users, $idSuffix);
   
   $all_fields = user_list_get_all_fields();
   $options_fields = array();
@@ -61,7 +63,7 @@ function user_list_form($form, &$form_state, $users) {
   	'#default_value' => array_keys(user_list_get_shown_data(variable_get('visualscience_search_table', 'users'))),
     '#ajax' => array(
       'callback' => 'user_list_fields_callback',
-      'wrapper' => 'user_list-list',
+      'wrapper' => 'user_list-list-'.$idSuffix,
       'progress' => array(),
     ),
   	'#prefix' => '<div style="max-height: 300px; overflow: auto"><table style="border: 0;"><tr><td valign="top" style="border: 0;">',
@@ -75,7 +77,7 @@ function user_list_form($form, &$form_state, $users) {
     '#default_value' => array_keys(user_list_get_shown_fields()),
     '#ajax' => array(
       'callback' => 'user_list_fields_callback',
-      'wrapper' => 'user_list-list',
+      'wrapper' => 'user_list-list-'.$idSuffix,
       'progress' => array(),
     ),
   	'#prefix' => '<td valign="top" style="border: 0;">',
@@ -90,40 +92,21 @@ function user_list_form($form, &$form_state, $users) {
     '#prefix' => '<table id="actions-table"><tr><td>',
   );
   
-  if (!isset($_SESSION["searchNumber"])) {
-  	$_SESSION["searchNumber"] = 0;
-  }
-  
   $form['users']['export'] = array(
   	'#type' => 'submit',
   	'#value' => t('Export to CSV'),
   	'#submit' => array('user_list_export_submit'),
   	'#validate' => array('user_list_form_validate'),
-    '#suffix' => '<input id="ls-map-btn-'.$_SESSION["searchNumber"].'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/></td></tr></table>',
+    '#suffix' => '<input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/><input id="skype-list-btn-'.$idSuffix.'" type="button" onclick="skypeOpen(this)" class="form-submit skype-list-btn" value="Skype"/></td></tr></table>',
   );
-/*  
-  $form['users']['ls_progress'] = array(
-    '#type' => 'container',
-    '#attributes' => array('id'=>'watchProgress'),
-  );
-  
-  $form['users']['ls_map'] = array(
-    '#type' => 'container',
-    '#attributes' => array('id'=>'mapcontainer', 'style'=>'width:700px; height:300px'),
-  );
-  
-  $form['users']['ls_results'] = array(
-    '#type' => 'container',
-    '#attributes' => array('id' => 'searchResults'),
-  );
-*/  
+ 
   if (isset($form_state['values']['user_data'])) {
     user_list_save_hidden_user_data($form_state['values']['user_data']);
-    $form['users']['list'] = user_list_get_user_list($users);
+    $form['users']['list'] = user_list_get_user_list($users, $idSuffix);
   }
   if (isset($form_state['values']['field_list'])) {
     user_list_save_hidden_fields($form_state['values']['field_list']);
-    $form['users']['list'] = user_list_get_user_list($users);
+    $form['users']['list'] = user_list_get_user_list($users, $idSuffix);
   }
   
   return $form; 
@@ -171,7 +154,7 @@ function user_list_search_save_callback($form, $form_state) {
  * @return		form renderable array of users in #tableselect element
  * @author Vahan
  */
-function user_list_get_user_list($list) {
+function user_list_get_user_list($list, $idSuffix) {
   $table = variable_get("visualscience_search_table", "users");
   $statuses = array('blocked', 'active');
   $field_columns = array();
@@ -228,15 +211,15 @@ function user_list_get_user_list($list) {
       '#tree' => TRUE,
       '#multiple' => TRUE,
       '#js_select' => TRUE,
-      '#input' => true,
-      //'#attributes' => array("id"=>"user_list-list"),
-      '#prefix' => '<div id="user_list-list">',
+      '#prefix' => '<div id="user_list-list"'.$idSuffix.'>',
       '#suffix' => '</div>',
+      '#input'=>true,
+      //'#attributes' => array("id"=>"user_list-list-".$idSuffix),
     );
   } else {
     return array(
       '#type' => 'container',
-      '#prefix' => '<div id="user_list-list">'.t('There are no users found'),
+      '#prefix' => '<div id="user_list-list-'.$idSuffix.'">'.t('There are no users found'),
       '#suffix' => '</div>',
     );
   }
