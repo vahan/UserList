@@ -137,7 +137,7 @@ function user_list_form($form, &$form_state, $users) {
  * @return          renderable array
  */
 function user_list_fields_callback($form, $form_state) {
-  $_GET["q"] = "userlist";
+  $_GET["q"] = "visualscience"; //Magic!
   return $form['users']['list'];
 }
 
@@ -220,16 +220,18 @@ function user_list_get_user_list($list) {
       '#type' => 'tableselect',
       '#header' => $header,
       '#options' => $options,
-      '#ajax' => array(
+      /*'#ajax' => array(
         'callback' => 'user_list_checked_callback',
       	'wrapper' => 'users_selected_div',
       	'event' => 'click',
-      ),
+      ),*/
       '#tree' => TRUE,
       '#multiple' => TRUE,
       '#js_select' => TRUE,
-      '#input'=>true,
-      '#attributes' => array("id"=>"user_list-list"),
+      '#input' => true,
+      //'#attributes' => array("id"=>"user_list-list"),
+      '#prefix' => '<div id="user_list-list">',
+      '#suffix' => '</div>',
     );
   } else {
     return array(
@@ -297,8 +299,10 @@ function user_list_form_message($form, &$form_state, $users)
  * @param array $form_state refernce on the array representing the state of the form
  */
 function user_list_form_submit($form, &$form_state) {
+  $_GET["q"] = "visualscience"; // Again magic!
+  
   $form_state['page_values'][1] = $form_state['values'];
-
+  
   if (!empty($form_state['page_values'][2])) {
     $form_state['values'] = $form_state['page_values'][2];
   }
@@ -310,7 +314,7 @@ function user_list_form_submit($form, &$form_state) {
 
 /**
  * 
- * Validate handler for the message button on first page.
+ * Validate handler for the message button on first page.	
  * @param array $form		the form for wich this function is used.
  * @param array $form_state refernce on the array representing the state of the form
  */
