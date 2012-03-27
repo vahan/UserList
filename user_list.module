@@ -9,7 +9,9 @@
 
 require_once 'includes/user_list.fields.inc';
 require_once 'includes/user_list.form.inc';
+require_once 'includes/user_list.conference.form.inc';
 require_once 'includes/user_list.export.inc';
+require_once 'includes/user_list.conference.inc';
 require_once 'includes/user_list.settings.inc';
 require_once 'includes/user_list.utils.inc';
 
@@ -59,23 +61,27 @@ function user_list_science_title() {
 
 /**
  * 
- * Implementation of hook_science_veiw()
+ * Implementation of hook_science_tab()
  * 
- * Returns HTML to show in the User List tab
- * @param array $list	the search results to be rendered and shown in the tab
+ * Returns HTML to show in the User List visialization
+ * @param array $list the search results to be rendered and shown
+ * @param string $idSuffix the number of the current search dialog
  */
 function user_list_science_tab($list, $idSuffix) {
+  // Adding jquery ui components used
   drupal_add_library('system', 'ui.autocomplete');
   drupal_add_library('system', 'ui.datepicker');
   drupal_add_library('system', 'ui.dialog');
 	
-  drupal_add_js('http://livingscience.ethz.ch/livingscience/livingscience/livingscience.nocache.js', 'external'); //TODO: js adds somehow wrongly!
+  // Adding javascripts
+  drupal_add_js('http://livingscience.ethz.ch/livingscience/livingscience/livingscience.nocache.js', 'external');
   drupal_add_js(drupal_get_path('module', 'user_list') .'/user_list.js');
-  // I don't know why, but I have to add the js once again in order for it to work
   drupal_add_js(drupal_get_path('module', 'visualscience') .'/visualscience.jquery.layout.js');
   drupal_add_js(drupal_get_path('module', 'visualscience') .'/visualscience.js');
   drupal_add_js(drupal_get_path('module', 'visualscience') .'/visualscience.jquery.dialog-extend.js');
   
+  // Adding the css
+  drupal_add_css(drupal_get_path('module', 'user_list') .'/user_list.css');
   
   $paginated = FALSE;
   $header = "User List";
@@ -83,7 +89,7 @@ function user_list_science_tab($list, $idSuffix) {
   $number = 30;
   $element = 0;
   
-  drupal_add_css(drupal_get_path('module', 'user_list') .'/user_list.css');
+  // Creating the output
   $output = '<div class="visualscience-user_list" id="visualscience-user_list-';
   $output .= $idSuffix.'">';
   if ($header) {
@@ -112,8 +118,15 @@ function user_list_forms($form_id, $args) {
         'callback' => 'user_list_form',
       );
       return $forms;
+   } else if (strpos($form_id, 'user_list_conference_form') !== FALSE) {
+   	  $forms[$form_id] = array(
+        'callback' => 'user_list_conference_form',
+      );
+      return $forms;
    }
 }
+
+
 
 /**
  * 
