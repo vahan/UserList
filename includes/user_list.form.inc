@@ -97,9 +97,20 @@ function user_list_form($form, &$form_state, $users, $idSuffix) {
   	'#value' => t('Export to CSV'),
   	'#submit' => array('user_list_export_submit'),
   	'#validate' => array('user_list_form_validate'),
-    '#suffix' => '<input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/><input id="skype-list-btn-'.$idSuffix.'" type="button" onclick="skypeOpen(this)" class="form-submit skype-list-btn" value="Skype"/></td></tr></table>',
+    '#suffix' => '<input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/><input id="skype-list-btn-'.$idSuffix.'" type="button" onclick="skypeOpen(this)" class="form-submit skype-list-btn" value="Skype"/>',
   );
  
+  $form['users']['conference'] = array(
+  	'#type' => 'submit',
+  	'#value' => t('Conference'),
+    '#ajax' => array(
+      'callback' => 'user_list_conference_submit',
+      'wrapper' => 'conference-details-'.$idSuffix,
+      'progress' => array(),
+    ),
+    '#suffix' => '</td><td><div id="conference-details-'.$idSuffix.'"></div></td></tr></table>',
+  );
+  
   if (isset($form_state['values']['user_data'])) {
     user_list_save_hidden_user_data($form_state['values']['user_data']);
     $form['users']['list'] = user_list_get_user_list($users, $idSuffix);

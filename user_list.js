@@ -47,3 +47,18 @@ function lsSearch(idSuffix) {
 		document.getElementById("searchResults-"+idSuffix+"-1").innerHTML = html;
 	});
 }
+/**
+ * Function to get the value of the specified field from the checked checkboxes and return as an array
+ * @param fieldValue
+ * @param idSuffix
+ */
+function getCheckedFieldValue(fieldValue, idSuffix) {
+	userListCheckboxes = jQuery("#user_list-list-"+idSuffix).find('a').each(function(index){
+		// TODO handle this part to have a better search quiery. Look for the username/first name/last name
+		if (jQuery(this).html() == fieldValue) {
+			query[idSuffix] += jQuery(this).parent().parent().next().next().next().text() + " " + jQuery(this).parent().parent().next().next().next().next().text();
+			query[idSuffix] += " ";
+			
+		}		
+	});	
+}
