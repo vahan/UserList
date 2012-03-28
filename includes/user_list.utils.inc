@@ -93,18 +93,19 @@ function user_list_user_fields($uid, $fid) {
   foreach ($all_fields as $fname => $field) {
     if ($fid != $field['field_id']) continue;
     $user_field = $user->$fname;
-    $tid = null;
+    $field_name = null;
     if (count($user_field) > 0) {
-      $tid = isset($user_field['und'][0]['tid']) ? $user_field['und'][0]['tid'] : null; //TODO: Notice: Undefined index: tid
+      $field_name = isset($user_field['und'][0]['value']) ? $user_field['und'][0]['value'] : null; //TODO: Notice: Undefined index: tid
     }
-    if ($tid == null) continue;
-    $term = taxonomy_term_load($tid); //Loads the term, from where we can get the appropriate vid 
+    if ($field_name == null) continue;
+    $fields[$fname] = $field_name;
+    /*$term = taxonomy_term_load($tid); //Loads the term, from where we can get the appropriate vid 
     $taxonomy_tree = taxonomy_get_tree($term->vid);
     foreach ($taxonomy_tree as $tax) {
       if ($tid == $tax->tid) {
         $fields[$fname] = $tax->name;
       }
-    }
+    }*/
   }
   
   return $fields;

@@ -55,7 +55,14 @@ function user_list_save_hidden_user_data($user_data) {
  * returns an array containing all fields
  */
 function user_list_get_all_fields() {  
-  return field_info_instances('user', 'user');
+  $all = field_info_instances('user', 'user');
+  $fields = array();
+  foreach ($all as $key => $value) {
+    if (strpos($key, "field_") !== 0)
+      continue;
+    $fields[$key] = $value;
+  }
+  return $fields;
 }
 
 /**

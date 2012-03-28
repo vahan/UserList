@@ -208,7 +208,7 @@ function user_list_get_user_list($list, $idSuffix) {
         }
       } else {
         $options = array();
-      }    
+      }
     }
     return array(
       '#type' => 'tableselect',
