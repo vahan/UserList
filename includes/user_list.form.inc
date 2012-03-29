@@ -97,7 +97,7 @@ function user_list_form($form, &$form_state, $users, $idSuffix) {
   	'#value' => t('Export to CSV'),
   	'#submit' => array('user_list_export_submit'),
   	'#validate' => array('user_list_form_validate'),
-    '#suffix' => '<input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/><input id="skype-list-btn-'.$idSuffix.'" type="button" onclick="skypeOpen(this)" class="form-submit skype-list-btn" value="Skype"/>',
+    '#suffix' => '<input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/>',
   );
  
   $form['users']['conference'] = array(

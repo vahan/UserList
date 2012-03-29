@@ -43,10 +43,23 @@ function lsSearch(idSuffix) {
 				html += " (" + pub.year + "): <b>" + pub.title + "</b>";
 				html += "</p>";
 			}
+
+			// some stats
+			html += "<p>total results: " + livingscience.getTotalResults() + "</p>";
+			authorIndices = livingscience.getAuthorStats();
+			if (authorIndices)
+			{
+				html += "<p>h-index: " + authorIndices.hindex+ " g-index: " + authorIndices.gindex+ " total citations: " + authorIndices.citationcount+ "</p>";
+			}
 		}
 		document.getElementById("searchResults-"+idSuffix+"-1").innerHTML = html;
+
+		// search for an author image
+		document.getElementById("authorImage").innerHTML = "";
+		livingscience.addAuthorImage("authorImage");
 	});
 }
+
 /**
  * Function to get the value of the specified field from the checked checkboxes and return as an array
  * @param fieldValue
