@@ -32,9 +32,9 @@ function user_list_conference_submit($form, &$form_state) {
 //  	$opentok_form['field_participants'][LANGUAGE_NONE]['#after_build_done'] = FALSE;
 //  	$opentok_form['field_participants'][LANGUAGE_NONE][0]['value']['#defaults_loaded'] = FALSE;
 //  	$opentok_form['field_participants'][LANGUAGE_NONE][0]['value']['#processed'] = FALSE;
-
+// TODO handle this in a correct way..
 	// Setting the default value for the participants based on the selection from user_list
-  	$opentok_form['field_participants'][LANGUAGE_NONE][0]['value']['#value'] = $selected_users_string;
+  	$opentok_form['opentok_participants'][LANGUAGE_NONE][0]['value']['#value'] = $selected_users_string;
 //  	$opentok_form['field_participants'][LANGUAGE_NONE][0]['value']['#attributes']['disabled'] = TRUE;
   	
   	
@@ -42,7 +42,7 @@ function user_list_conference_submit($form, &$form_state) {
 //  	$opentok_form['field_participants'][LANGUAGE_NONE][0]['value']['#default_value'] = $selected_users_string;
 //  	$form['field_participants'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
 //  	$form['field_participants']['#disabled'] = TRUE;
-  	hide($form['field_participants']);
+  	hide($form['opentok_participants']);
 	return $opentok_form;
 }
 

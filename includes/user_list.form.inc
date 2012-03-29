@@ -89,7 +89,8 @@ function user_list_form($form, &$form_state, $users, $idSuffix) {
   	'#value' => t('Enter the message >>'),
   	'#submit' => array('user_list_form_submit'),
   	'#validate' => array('user_list_form_validate'),
-    '#prefix' => '<table id="actions-table"><tr><td>',
+    '#prefix' => '<table id="actions-table"><tr><td style="vertical-align:top;">',
+  	'#suffix' => '</td>'
   );
   
   $form['users']['export'] = array(
@@ -97,18 +98,21 @@ function user_list_form($form, &$form_state, $users, $idSuffix) {
   	'#value' => t('Export to CSV'),
   	'#submit' => array('user_list_export_submit'),
   	'#validate' => array('user_list_form_validate'),
-    '#suffix' => '<input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/>',
+  	'#prefix' => '<td style="vertical-align:top;">',
+    '#suffix' => '</td><td style="vertical-align:top;"><input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/></td>',
   );
  
   $form['users']['conference'] = array(
   	'#type' => 'submit',
   	'#value' => t('Conference'),
+  	'#submit' => array(),
     '#ajax' => array(
       'callback' => 'user_list_conference_submit',
       'wrapper' => 'conference-details-'.$idSuffix,
       'progress' => array(),
     ),
-    '#suffix' => '</td><td><div id="conference-details-'.$idSuffix.'"></div></td></tr></table>',
+    '#prefix' => '<td style="vertical-align:top;">',
+    '#suffix' => '</td><td style="width: 100%;"><div id="conference-details-'.$idSuffix.'"></div></td></tr></table>',
   );
   
   if (isset($form_state['values']['user_data'])) {
@@ -208,24 +212,22 @@ function user_list_get_user_list($list, $idSuffix) {
         }
       } else {
         $options = array();
-      }
+      }    
     }
     return array(
       '#type' => 'tableselect',
       '#header' => $header,
       '#options' => $options,
-      /*'#ajax' => array(
+      '#ajax' => array(
         'callback' => 'user_list_checked_callback',
       	'wrapper' => 'users_selected_div',
       	'event' => 'click',
-      ),*/
+      ),
       '#tree' => TRUE,
       '#multiple' => TRUE,
       '#js_select' => TRUE,
-      '#prefix' => '<div id="user_list-list"'.$idSuffix.'>',
-      '#suffix' => '</div>',
       '#input'=>true,
-      //'#attributes' => array("id"=>"user_list-list-".$idSuffix),
+      '#attributes' => array("id"=>"user_list-list-".$idSuffix),
     );
   } else {
     return array(

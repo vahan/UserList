@@ -1,3 +1,5 @@
+// edited by cris, 20120329 7:28 pm
+
 var lsObject = new Array();
 var query = new Array();
 
@@ -11,52 +13,36 @@ function lsSearch(idSuffix) {
 	if (!lsObject[idSuffix]) return;
 	document.getElementById("watchProgress-"+idSuffix+"-1").innerHTML = "Please wait...";
 	document.getElementById("searchResults-"+idSuffix+"-1").innerHTML = "";
-	
+
 	//Create a search query from the selected users
 	query[idSuffix] = "";
 	userListCheckboxes = jQuery(':checkbox[id|="edit-list"]:checked').each(function(index){
-	//userListCheckboxes = jQuery("#user_list-list-"+idSuffix).find(':checkbox:checked').each(function(index){
+		//userListCheckboxes = jQuery("#user_list-list-"+idSuffix).find(':checkbox:checked').each(function(index){
 		// TODO handle this part to have a better search quiery. Look for the username/first name/last name
-		query[idSuffix] += jQuery(this).parent().parent().next().text();
+		query[idSuffix] += jQuery(this).parent().parent().next().next().next().next().next().next().text();
 		query[idSuffix] += " ";
+		query[idSuffix] +=  jQuery(this).parent().parent().next().next().next().next().next().next().next().text();
+		console.log("search for " + query[idSuffix]);
+		
 	});
 	console.log("query: " + query[idSuffix]);
-	lsObject[idSuffix].searchAuthor(query[idSuffix], function(publications) {
-		//console.log("lavash");
-		document.getElementById("watchProgress-"+idSuffix+"-1").innerHTML = "<span>Results for '"+query[idSuffix]+"'</span>";
-		var html = "";
-		if (publications)
+	lsObject[idSuffix].searchAuthor(query[idSuffix], function(publications) 
+	{
+		var shortInfo =  "<p>" + lsObject[idSuffix].getTotalResults() + " results for: "+query[idSuffix]+"</p>";
+		var authorIndices = lsObject[idSuffix].getAuthorStats();
+		if (authorIndices)
 		{
-		    for (var i=0; i<publications.length; i++)
-			{
-				var pub = publications[i];
-				html += "<p>";
-				if (pub.authors)
-				{
-					for (var j=0; j<pub.authors.length; j++)
-					{
-						var author = pub.authors[j];
-						html += author.name;
-						if (j < pub.authors.length - 1) html += ", ";
-					}
-				}
-				html += " (" + pub.year + "): <b>" + pub.title + "</b>";
-				html += "</p>";
-			}
-
-			// some stats
-			html += "<p>total results: " + livingscience.getTotalResults() + "</p>";
-			authorIndices = livingscience.getAuthorStats();
-			if (authorIndices)
-			{
-				html += "<p>h-index: " + authorIndices.hindex+ " g-index: " + authorIndices.gindex+ " total citations: " + authorIndices.citationcount+ "</p>";
-			}
+			shortInfo += "<p>H-Index: " + authorIndices.hindex+ " | G-Index: " + authorIndices.gindex+ " | Total Citations: " + authorIndices.citationcount+ "</p>";
 		}
-		document.getElementById("searchResults-"+idSuffix+"-1").innerHTML = html;
-
+		shortInfo += "<p id=\"authorImage" + idSuffix + "\" />";
+		document.getElementById("watchProgress-"+idSuffix+"-1").innerHTML = shortInfo;
+		
+		// display result list
+		document.getElementById("searchResults-"+idSuffix+"-1").innerHTML = "";
+		lsObject[idSuffix].generateList(0, 10,  "searchResults-"+idSuffix+"-1");
+		
 		// search for an author image
-		document.getElementById("authorImage").innerHTML = "";
-		livingscience.addAuthorImage("authorImage");
+		lsObject[idSuffix].addAuthorImage("authorImage" + idSuffix, 100); // 100 px is image width
 	});
 }
 
@@ -71,7 +57,7 @@ function getCheckedFieldValue(fieldValue, idSuffix) {
 		if (jQuery(this).html() == fieldValue) {
 			query[idSuffix] += jQuery(this).parent().parent().next().next().next().text() + " " + jQuery(this).parent().parent().next().next().next().next().text();
 			query[idSuffix] += " ";
-			
+
 		}		
 	});	
 }
