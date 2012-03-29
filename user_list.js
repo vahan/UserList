@@ -16,7 +16,7 @@ function lsSearch(idSuffix) {
 
 	//Create a search query from the selected users
 	query[idSuffix] = "";
-	userListCheckboxes = jQuery(':checkbox[id|="edit-list"]:checked').each(function(index){
+	userListCheckboxes = jQuery('#user_list-list-'+idSuffix+' input:checked').each(function(index){
 		//userListCheckboxes = jQuery("#user_list-list-"+idSuffix).find(':checkbox:checked').each(function(index){
 		// TODO handle this part to have a better search quiery. Look for the username/first name/last name
 		query[idSuffix] += jQuery(this).parent().parent().next().next().next().next().next().next().text();
