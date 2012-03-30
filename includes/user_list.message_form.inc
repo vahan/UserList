@@ -87,8 +87,9 @@ function user_list_form_message_submit($form, &$form_state) {
 //	user_list_send_message($users, $subject, $message, $from);
 
 	// TODO handle progress and errors
+	$idSuffix = substr($form["#form_id"], strlen("user_list_message_form_"));
 	drupal_mail('user_list', 'custom', $recipientEmails, user_preferred_language($user), array('message' => $message, 'subject' => $subject), $from, TRUE);
-	return "Message sent successfully";
+	return '<div id="user-list-message-form-div-'.$idSuffix.'">Message sent successfully</div>';
 /*	
   $page_one_values = $form_state['page_values'][1];
   $page_two_values = $form_state['values'];
