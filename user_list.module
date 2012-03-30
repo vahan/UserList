@@ -9,7 +9,7 @@
 
 require_once 'includes/user_list.fields.inc';
 require_once 'includes/user_list.form.inc';
-require_once 'includes/user_list.conference.form.inc';
+require_once 'includes/user_list.message_form.inc';
 require_once 'includes/user_list.export.inc';
 require_once 'includes/user_list.conference.inc';
 require_once 'includes/user_list.settings.inc';
@@ -118,9 +118,9 @@ function user_list_forms($form_id, $args) {
         'callback' => 'user_list_form',
       );
       return $forms;
-   } else if (strpos($form_id, 'user_list_conference_form') !== FALSE) {
+   } else if (strpos($form_id, 'user_list_message_form') !== FALSE) {
    	  $forms[$form_id] = array(
-        'callback' => 'user_list_conference_form',
+        'callback' => 'user_list_message_form',
       );
       return $forms;
    }
@@ -154,4 +154,27 @@ function user_list_update_tab($list) {
 function theme_user_list_list($list, $idSuffix, $paginated = FALSE) {
   
   return user_list_science_tab($list, $idSuffix, $paginated);
+}
+
+/**
+ * 
+ * Implementation of hook_mail. Function building the emails sent via user_list module
+ * @param unknown_type $key
+ * @param unknown_type $message
+ * @param unknown_type $params
+ */
+function user_list_mail($key, &$message, $params) {
+	global $user;
+	$subject = $params['subject'];
+	$user_message = $params['message'];
+	switch ($key) {
+		case 'custom':
+			$message['subject'] = $subject;
+			$message['body'][] = "Dear Sir/Madam,";
+			$message['body'][] = "This message was sent to you by ".$user->name." via user_list module. The message follows:";
+			$message['body'][] = $user_message;
+			$message['body'][] = "Best regards,";
+			$message['body'][] = "QScience team";	
+			break;
+	}
 }

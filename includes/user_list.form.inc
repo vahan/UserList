@@ -86,8 +86,13 @@ function user_list_form($form, &$form_state, $users, $idSuffix) {
   
   $form['users']['submit'] = array(
   	'#type' => 'submit',
-  	'#value' => t('Enter the message >>'),
-  	'#submit' => array('user_list_form_submit'),
+  	'#value' => t('Send a message >>'),
+    '#ajax' => array(
+      'callback' => 'user_list_load_form_message',
+      'wrapper' => 'user-list-message-form-div-'.$idSuffix,
+      'progress' => array(),
+    ),
+//  	'#submit' => array('user_list_form_submit'),
   	'#validate' => array('user_list_form_validate'),
     '#prefix' => '<table id="actions-table"><tr><td style="vertical-align:top;">',
   	'#suffix' => '</td>'
@@ -112,7 +117,8 @@ function user_list_form($form, &$form_state, $users, $idSuffix) {
       'progress' => array(),
     ),
     '#prefix' => '<td style="vertical-align:top;">',
-    '#suffix' => '</td><td style="width: 100%;"><div id="conference-details-'.$idSuffix.'"></div></td></tr></table>',
+    '#suffix' => '</td><td style="width: 100%;" rowspan="2"><div id="conference-details-'.$idSuffix.
+    '"></div></td></tr><tr><td colspan="4" style="vertical-align: top;"><div id="user-list-message-form-div-'.$idSuffix.'"></div></td></tr></table>',
   );
   
   if (isset($form_state['values']['user_data'])) {
@@ -249,6 +255,8 @@ function user_list_checked_callback($form, $form_state) {
   return $form['users_selected'];
 }
 
+
+
 /**
  * 
  * The second page to enter the message and send
@@ -257,6 +265,7 @@ function user_list_checked_callback($form, $form_state) {
  * @param array $users    TODO:UNUSED! 
  * @return array      modified form  
  */
+/*
 function user_list_form_message($form, &$form_state, $users)
 {
   $page_one_values = $form_state['page_values'][1];
@@ -287,27 +296,41 @@ function user_list_form_message($form, &$form_state, $users)
   );
   return $form;
 }
-
+*/
 /**
  * 
  * Submit handler for user_list_form message button.
  * @param array $form    the form for wich this function is used.
  * @param array $form_state refernce on the array representing the state of the form
  */
-function user_list_form_submit($form, &$form_state) {
-  $_GET["q"] = "visualscience"; // Again magic!
-  
-  $form_state['page_values'][1] = $form_state['values'];
-  
-  if (!empty($form_state['page_values'][2])) {
-    $form_state['values'] = $form_state['page_values'][2];
-  }
+function user_list_load_form_message($form, &$form_state) {
+	$userlist = $form_state['values']['list'];
+	$idSuffix = substr($form["#form_id"], strpos($form["#form_id"], "user_list_form_")+strlen("user_list_form_"));
 
-  // When form rebuilds, it will look at this to figure which page to build.
-  $form_state['page_num'] = 2;
-  $form_state['rebuild'] = TRUE;
+
+	$selected_users_string = "";
+    foreach ($userlist as $uid => $checked) {
+      if ($checked != 0) {
+        $selected_users_string .= $uid.",";
+      }
+    }
+    $selected_users_string = substr_replace($selected_users_string ,"",-1);
+
+    /* Uncomment if you want to pass an array instead of a string
+    $list = array();
+    foreach ($userlist as $uid => $checked) {
+      if ($checked != 0) {
+        $list[] = user_load($uid);
+      }
+    }
+    */
+    
+	// getting the form for sending messages
+	$message_form = drupal_get_form("user_list_message_form_".$idSuffix, $selected_users_string, $idSuffix);
+	
+	return $message_form;
 }
-
+	
 /**
  * 
  * Validate handler for the message button on first page.	
@@ -323,76 +346,6 @@ function user_list_form_validate($form, &$form_state)
     }
   }
   form_set_error('values', 'Select at least one user');
-}
-
-/**
- * 
- * The page 2 submit handler.
- * This is the final submit handler. Send the entered message to the selected users
- * @param array $form		the form for wich this function is used.
- * @param array $form_state refernce on the array representing the state of the form
- */
-function user_list_form_message_submit($form, &$form_state) {
-  $page_one_values = $form_state['page_values'][1];
-  $page_two_values = $form_state['values'];
-  
-  $users = $page_one_values['list'];
-  $subject = $page_one_values['subject'];
-  $message = $page_two_values['message'];
-  
-  $batch = array(
-    'operations' => array(array('user_list_send_message', array($users, $subject, $message))),
-    'title' => t('Your messages are being sent'),
-  );
-  
-  batch_set($batch);
-}
-
-/**
- * 
- * Sends the $message to the $users.
- * @param array $users    list of users to receive the message.
- * @param string $message  the message to be sent.
- */
-function user_list_send_message($users, $subject, $message) {
-  $successes = array();
-  $failures = array();
-  foreach($users as $uid => $checked) {
-    if ($checked === 0) continue;
-    $user = user_load($uid);
-    $params = array('message' => $message, 'user' => $user, 'subject' => $subject);
-
-    $result = drupal_mail('user_list', 'msg', $user->mail, user_preferred_language($user), $params, '', true);
-        
-    if ($result['result']) {
-      array_push($successes, $result);
-    }
-    else {
-      array_push($failures, $result);
-    }
-  }
-  
-  if (count($failures) == 0) {
-    drupal_set_message('All message have been correctly sent.','status');
-  }
-  else {
-    foreach ($failures as $f) {
-      $emails .= $f['to'] . "/n";
-    }
-    drupal_set_message('Error while sending the messages. The following emails have not been reached: \n'.$emails,'error');
-  }
-}
-
-/**
- * 
- * Validates the entered message and if it's empty throws an error.
- * @param array $form    the form for wich this function is used.
- * @param array $form_state refernce on the array representing the state of the form
- */
-function user_list_form_message_validate($form, &$form_state) {
-  if(!isset($form_state['values']['message'])) {
-    form_set_error('message', 'Type some text');
-  }
 }
 
 /**
