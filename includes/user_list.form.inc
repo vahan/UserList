@@ -104,8 +104,18 @@ function user_list_form($form, &$form_state, $users, $idSuffix) {
   	'#submit' => array('user_list_export_submit'),
   	'#validate' => array('user_list_form_validate'),
   	'#prefix' => '<td style="vertical-align:top;">',
-    '#suffix' => '</td><td style="vertical-align:top;"><input id="ls-map-btn-'.$idSuffix.'" type="button" onclick="lsMapOpen(this)" class="form-submit ls-map-btn" value="LS Map"/></td>',
+    '#suffix' => '</td>',
   );
+
+  foreach (module_invoke_all("science_button", $idSuffix) as $button_name => $science_button) {
+  	$form['users'][$button_name] = array(
+  		'#type' => 'submit',
+  		'#value' => t($science_button['value']),
+   		'#attributes' => array("id" => $science_button['id_prefix'].$idSuffix, "onclick" => $science_button['onclick']),
+  		'#prefix' => '<td style="vertical-align:top;">',
+  		'#suffix' => '</td>',
+  	);
+  }
  
   $form['users']['conference'] = array(
   	'#type' => 'submit',

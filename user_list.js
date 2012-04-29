@@ -1,5 +1,5 @@
 // edited by cris, 20120329 7:28 pm
-
+/*
 var lsObject = new Array();
 var query = new Array();
 
@@ -45,15 +45,16 @@ function lsSearch(idSuffix) {
 		lsObject[idSuffix].addAuthorImage("authorImage" + idSuffix, 100); // 100 px is image width
 	});
 }
-
+*/
 /**
  * Function to get the value of the specified field from the checked checkboxes and return as an array
  * @param fieldValue
  * @param idSuffix
  */
+// TODO delete this if everything works
+/*
 function getCheckedFieldValue(fieldValue, idSuffix) {
 	userListCheckboxes = jQuery("#user_list-list-"+idSuffix).find('a').each(function(index){
-		// TODO handle this part to have a better search quiery. Look for the username/first name/last name
 		if (jQuery(this).html() == fieldValue) {
 			query[idSuffix] += jQuery(this).parent().parent().next().next().next().text() + " " + jQuery(this).parent().parent().next().next().next().next().text();
 			query[idSuffix] += " ";
@@ -61,3 +62,4 @@ function getCheckedFieldValue(fieldValue, idSuffix) {
 		}		
 	});	
 }
+*/
